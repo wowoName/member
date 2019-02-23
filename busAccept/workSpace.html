@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" type="text/css" href="../plugins/newLayui/css/layui.css" />
+		<link rel="stylesheet" type="text/css" href="../css/style.min.css" />
+		<link rel="stylesheet" type="text/css" href="../css/workSapce.css" />
+		<link rel="stylesheet" type="text/css" href="../css/lisu.css" />
+		<title>工作空间</title>
+	</head>
+
+	<body class="gray-bg">
+		<div class="wrapper wrapper-content animated fadeInLeft">
+			<div class="layui-row">
+				<div class="layui-col-xs24 layui-col-md24">
+					<div class="ibox-title">
+						<!--顶部内容-->
+						<form class="layui-form" action="">
+							<div class="layui-form-item">
+								<div class="layui-inline">
+									<div class="header-title-common  header-title-waiting" title="待办事项">
+										<img src="../images/mark1.png" alt="" />
+										<span>2</span>
+									</div>
+								</div>
+								<div class="layui-inline">
+									<div class="header-title-common  header-title-finished" title="今日完成">
+										<img src="../images/finished1.png" alt="" />
+										<span>8</span>
+									</div>
+								</div>
+
+								<div class="layui-inline" style="float: right;">
+									<button class="layui-btn layui-btn-normal" type="button" id="reloadTbl"><i class="layui-icon layui-icon-refresh-1" style="vertical-align: middle;"></i>刷新</button>
+								</div>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="ibox-content">
+				<table class="layui-table" id="test" lay-filter="leaguerTbl"></table>
+			</div>
+		</div>
+
+		<!--驶离的弹窗信息-->
+		<div id="fromInfo" style="background-color: #f2f2f2;display: none;padding: 10px 20px;">
+			<div class="layui-card workSpace-flex">
+				<div>
+					<div class="layui-card-header">审核进度</div>
+					<div class="layui-card-body">
+
+						<ul class="layui-timeline">
+							<li class="layui-timeline-item">
+								<i class="layui-icon layui-timeline-axis">
+								<i class="layui-icon layui-icon-circle" ></i>
+								</i>
+								<div class="layui-timeline-content layui-text timeFinished">
+									<div class="layui-timeline-title">申报 2018-05-21 </div>
+									<div>申报：徐晓晓</div>
+								</div>
+							</li>
+							<li class="layui-timeline-item">
+								<i class="layui-icon layui-timeline-axis">
+								<i class="layui-icon layui-icon-circle" ></i>
+								</i>
+								<div class="layui-timeline-content layui-text timeFinished">
+									<div class="layui-timeline-title">初审 2018-05-23 </div>
+									<div>审核人：刘小孟</div>
+									<div>审核意见：资料齐全，予以通过</div>
+								</div>
+							</li>
+							<li class="layui-timeline-item">
+								<i class="layui-icon layui-timeline-axis">
+								<img src="../images/ongoing.png" width="24"/>
+							</i>
+								<div class="layui-timeline-content layui-text">
+									<div class="layui-timeline-title">复审</div>
+								</div>
+							</li>
+							<li class="layui-timeline-item">
+								<i class="layui-icon layui-timeline-axis">
+								<i class="layui-icon layui-icon-circle timeUnfinished" ></i>
+								</i>
+								<div class="layui-timeline-content layui-text timeUnfinished">
+									<div class="layui-timeline-title">完成</div>
+								</div>
+							</li>
+
+						</ul>
+					</div>
+				</div>
+
+				<div id="infoTemp">
+					<div class="layui-card-header">申报资料</div>
+					<div class="layui-card-body">
+						<div>
+							<label class="label-flex">车场名称：  </label><span lisu-model='name'></span>
+						</div>
+						<div>
+							<label class="label-flex">车场地点：  </label><span lisu-model='point'></span>
+						</div>
+						<div>
+							<label class="label-flex">所属城市：  </label><span lisu-model='city'></span>
+						</div>
+						<div>
+							<label class="label-flex">车场规模：  </label><span lisu-model='amount'></span>
+						</div>
+						<div>
+							<label class="label-flex">车场类型：  </label><span lisu-model='parkType'></span>
+						</div>
+
+						<div>
+							<label class="label-flex">泊位类型：  </label><span lisu-model='type'></span>
+						</div>
+						<div>
+							<label class="label-flex">联系人：  </label><span lisu-model='linkName'></span>
+						</div>
+						<div>
+							<label class="label-flex">联系电话：  </label><span lisu-model='phone'></span>
+						</div>
+						<div>
+							<label class="label-flex">收费方式：  </label><span lisu-model='shoufei'></span>
+						</div>
+						<div>
+							<label class="label-flex">收费说明：  </label><span lisu-model='shuoming'></span>
+						</div>
+
+						<div>
+							<label class="label-flex">附件：  </label><span lisu-model='shuomingd' id="infoMsg"></span>
+							<img src="" alt="" lisu-model='pic' width="120" id="infoImg" />
+							<a href="data/审核意见书.txt" style="color: blue;text-decoration:underline" download="审核意见书" id="infoLink">审核意见书</a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="lisu-form-body" style="padding: 5px;" id="requireForm">
+				<div class="lisu-form-item-min">
+					<div class="lisu-form-item">
+						<label for="" class="lisu-label require">审批意见</label>
+						<textarea name="" rows="" cols="2" class="lisu-text" autocomplete="off" placeholder="请输入审批意见" lisu-re='请输入审批意见'></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../plugins/newLayui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/lisuUtils.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/zoomImg.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/html" id="barDemo">
+			<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="view">审批处理</a>
+		</script>
+		<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+		<script type="text/javascript">
+			//一般直接写在一个js文件中
+			layui.use(['layer', 'form', 'table', 'laydate', 'jquery'], function() {
+				var layer = layui.layer,
+					form = layui.form,
+					table = layui.table,
+					laydate = layui.laydate,
+					$ = layui.jquery;
+				//初始化表格
+				function initTbl() {
+					//加载状态
+					layer.load(0);
+					table.render({
+						elem: '#test',
+						url: '../data/workSpace.json',
+						cellMinWidth: 80,
+						id: 'reloadTbl',
+						height: document.documentElement.clientHeight - 180,
+						cols: [
+							[{
+								field: 'linkName',
+								title: '申报人',
+								width: 120
+							}, {
+								field: 'time',
+								title: '申报时间',
+								width: 120
+							}, {
+								field: 'name',
+								title: '停车场名称',
+							}, {
+								field: 'type',
+								title: '车场类型',
+								width: 120
+							}, {
+								field: 'parkType',
+								title: '泊位类型',
+								width: 120
+							}, {
+								field: 'amount',
+								title: '规模',
+								width: 120
+							}, {
+								field: 'jindu',
+								title: '审核进度',
+								width: 120
+							}, {
+								title: '操作',
+								toolbar: '#barDemo',
+								width: 100
+							}]
+						],
+						page: true,
+						done: function() {
+							//完成取消加载状态
+							layer.closeAll('loading');
+						}
+					});
+				}
+				initTbl();
+
+				//监听行单击事件（单击事件为：rowDouble）
+				table.on('rowDouble(leaguerTbl)', function(obj) {
+					var data = obj.data;
+					openLayer(data);
+					//标注选中样式
+					obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
+				});
+
+				//监听工具条
+				table.on('tool(leaguerTbl)', function(obj) {
+					var data = obj.data;
+					var layEvent = obj.event;
+					if(layEvent === 'view') {
+						openLayer(data);
+					};
+				});
+
+				function openLayer(data) {
+					//填充数据
+					lisuUtils.fillForm("infoTemp", data);
+					//infoImg infoLink
+					if(data.hasOwnProperty("pic")) {
+						$("#infoImg").show();
+						$("#infoLink").hide();
+						$("#infoMsg").hide();
+					} else if(data.hasOwnProperty("linkData")) {
+						$("#infoImg").hide();
+						$("#infoLink").show();
+						$("#infoMsg").hide();
+					} else {
+						$("#infoImg").hide();
+						$("#infoLink").hide();
+						$("#infoMsg").show();
+					}
+					lisuUtils.resetForm("requireForm")
+					//处理
+					layerObject = layer.open({
+						type: 1,
+						title: '<i class="fa fa-edit"></i>申报进度',
+						area: "800px",
+						content: $("#fromInfo"),
+						end: function() {},
+						btn: ['提交', '关闭'], //
+						yes: function() {
+							if(lisuUtils.requireForm("requireForm")) {
+								layer.closeAll();
+								layer.msg("提交成功!");
+							}
+						},
+						btn2: function() {
+							layer.closeAll();
+						}
+					});
+				}
+
+				//查询
+				$("#reloadTbl").on("click", function() {
+					layer.load(0);
+					table.reload('reloadTbl', {
+						page: {
+							curr: 1 //重新从第 1 页开始
+						},
+						where: {}
+					});
+				});
+
+			});
+
+			//图片放大
+			$("#infoImg").initZoomImg();
+		</script>
+	</body>
+
+</html>

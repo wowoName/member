@@ -1,0 +1,122 @@
+.beg-login-bg {
+	background-color: #393D49;
+	background: url(../images/login_bg_teyiting.png) no-repeat center center;
+	background-size: 100% 100%;
+}
+
+.login-con {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: url(../images/login_bg_teyiting.png) no-repeat center center;
+	background-size: 100% 100%;
+}
+
+.beg-login-box {
+	width: 450px;
+	height: 280px;
+	margin: 10% auto;
+	border-radius: 10px;
+	color: #000000;
+	background-color: #FFFFFF;
+}
+
+.beg-login-box header {
+	height: 39px;
+	padding: 10px;
+	border-bottom: 1px solid aliceblue;
+}
+
+.beg-login-box header h1 {
+	text-align: center;
+	font-size: 25px;
+	line-height: 40px;
+	color: #207dc3;
+}
+
+.beg-login-box .beg-login-main {
+	height: 185px;
+	padding: 30px 90px 0;
+}
+
+.beg-login-main .layui-form-item {
+	position: relative;
+}
+
+.beg-login-main .layui-form-item .beg-login-icon {
+	position: absolute;
+	color: #cccccc;
+	top: 10px;
+	left: 10px;
+}
+
+.beg-login-main .layui-form-item input {
+	padding-left: 34px;
+}
+
+.beg-login-box footer {
+	height: 35px;
+	padding: 10px 10px 0 10px;
+}
+
+.beg-login-box footer p {
+	line-height: 35px;
+	text-align: center;
+}
+
+.beg-pull-left {
+	float: left !important;
+}
+
+.beg-pull-right {
+	float: right !important;
+}
+
+.beg-clear {
+	clear: both;
+}
+
+.beg-login-remember {
+	line-height: 38px;
+}
+
+.beg-login-remember .layui-form-switch {
+	margin-top: 0px;
+}
+
+.beg-login-code-box {
+	position: relative;
+	padding: 10px;
+}
+
+.beg-login-code-box input {
+	position: absolute;
+	width: 100px;
+}
+
+.beg-login-code-box img {
+	cursor: pointer;
+	position: absolute;
+	left: 115px;
+	height: 38px;
+}
+
+.lisu-loginBtn {
+	width: 100%;
+	letter-spacing: 4px;
+	text-indent: 4px;
+}
+
+.logindesc{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 66px;
+	line-height: 66px;
+	background-color: rgba(0,0,0,.5);
+	color: #FFFFFF;
+	text-align: center;
+}
