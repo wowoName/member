@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 		<link rel="shortcut icon" href="images/logo.jpg" />
-		<title>会员登录</title>
+		<title>会员找回密码</title>
 		<link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
 		<link rel="stylesheet" href="css/login.css" />
 		<link rel="stylesheet" type="text/css" href="plugins/font-awesome/css/font-awesome.css"/>
@@ -17,37 +17,28 @@
 		<div class="login-con">
 			<div class="beg-login-box">
 				<header>
-					<h1>会员登录</h1>
+					<h1>找回密码</h1>
 				</header>
 				<div class="beg-login-main">
 					<form action="/manage/login" class="layui-form" method="post">
 						<div class="layui-form-item">
 							<label class="beg-login-icon">
-                         <i class="fa fa-envelope" aria-hidden="true"></i>
+                       <i class="fa fa-envelope" aria-hidden="true"></i>
                     </label>
-							<input type="text" name="userName" autocomplete="off" placeholder="请输入邮箱地址" class="layui-input">
+							<input type="text" name="userName" autocomplete="off" placeholder="请输入注册邮箱" class="layui-input">
 						</div>
-						<div class="layui-form-item">
-							<label class="beg-login-icon">
-                        <i class="layui-icon">&#xe642;</i>
-                    </label>
-							<input type="password" name="password" autocomplete="off" placeholder="请输入密码" class="layui-input">
-						</div>
+						
 						<div class="layui-form-item">
 							<button class="layui-btn layui-btn-normal lisu-loginBtn" lay-submit lay-filter="login">
-                            登录
+                            发送邮件
                         </button>
 						</div>
 
 					</form>
-					<div class="loginbottom">
-						<a href="retrievepwd.html">忘记密码</a>
-						<a href="registered.html">注册</a>
-					</div>
 				</div>
 			</div>
 		</div>
-		<div class="logindesc">瑞讯集团--用户登录中心</div>
+		
 		<script type="text/javascript" src="plugins/layui/layui.js"></script>
 		<script>
 			layui.use(['layer', 'form'], function() {
