@@ -5,19 +5,18 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<link rel="shortcut icon" href="images/logoIcon.ico" />
-		<title>登录</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="shortcut icon" href="images/logo.jpg" />
+		<title>会员登录</title>
 		<link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
 		<link rel="stylesheet" href="css/login.css" />
-		<link rel="stylesheet" type="text/css" href="css/lisu.css" />
 	</head>
 
 	<body class="beg-login-bg">
 		<div class="login-con">
 			<div class="beg-login-box">
 				<header>
-					<h1>停车场备案管理系统</h1>
+					<h1>会员登录</h1>
 				</header>
 				<div class="beg-login-main">
 					<form action="/manage/login" class="layui-form" method="post">
@@ -25,7 +24,7 @@
 							<label class="beg-login-icon">
                         <i class="layui-icon">&#xe612;</i>
                     </label>
-							<input type="text" name="userName" autocomplete="off" placeholder="这里输入登录名" class="layui-input">
+							<input type="text" name="userName" autocomplete="off" placeholder="这里输入邮箱地址" class="layui-input">
 						</div>
 						<div class="layui-form-item">
 							<label class="beg-login-icon">
@@ -34,21 +33,15 @@
 							<input type="password" name="password" autocomplete="off" placeholder="这里输入密码" class="layui-input">
 						</div>
 						<div class="layui-form-item">
-							<!--<div class="beg-pull-left beg-login-remember">
-								<label>记住帐号？</label>
-								<input type="checkbox" name="rememberMe" value="true" lay-skin="switch" checked title="记住帐号">
-							</div>-->
 							<button class="layui-btn layui-btn-normal lisu-loginBtn" lay-submit lay-filter="login">
                             登录
                         </button>
 						</div>
 					</form>
 				</div>
-
 			</div>
-
 		</div>
-		<div class="logindesc"> <img src="images/beian.png" /> 鲁公网安备 37021202000133号</div>
+		<div class="logindesc">瑞讯集团--用户登录中心</div>
 		<script type="text/javascript" src="plugins/layui/layui.js"></script>
 		<script>
 			layui.use(['layer', 'form'], function() {
