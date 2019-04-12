@@ -98,15 +98,6 @@ layui.define(['element', 'common'], function(exports) {
 		var that = this;
 		var _config = that.config;
 		var tabIndex = that.exists(data.title);
-		//权限部分不能登录
-		if(data.title == "角色管理" || data.title == "权限管理" || data.title == "用户管理") {
-			layer.msg('亲，您暂时没有权限使用此模块哦！', {
-				icon: 4,
-				shade: 0.5,
-				skin: 'quanx'
-			});
-			return;
-		}
 		var waitLoadIndex;
 		if(tabIndex === -1) {
 			if(_config.openWait) {
@@ -152,9 +143,9 @@ layui.define(['element', 'common'], function(exports) {
 				id: tabId
 			});
 			//iframe 自适应
-			ELEM.contentBox.find('iframe[data-id=' + globalTabIdIndex + ']').each(function() {
-				$(this).height(ELEM.contentBox.height());
-			});
+// 			ELEM.contentBox.find('iframe[data-id=' + globalTabIdIndex + ']').each(function() {
+// 				$(this).height(ELEM.contentBox.height());
+// 			});
 			if(_config.closed) {
 				//监听关闭事件
 				ELEM.titleBox.find('li').children('i.layui-tab-close[data-id=' + globalTabIdIndex + ']').on('click', function() {

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title>出入金明细</title>
+		<link rel="stylesheet" type="text/css" href="scroller/pullToRefresh.css" />
+		<link rel="stylesheet" type="text/css" href="css/billDm.css" />
+
+	</head>
+
+	<body>
+		<div id="wrapper">
+			<div class="detailCon"  id="tblData">
+				
+				<div class="billItem" >
+					<div class="itemChild">
+						<span class="title">时间</span>
+						<span class="content">{{item.time}}</span>
+					</div>
+
+					<div class="itemChild">
+						<span class="title">金额</span>
+						<span class="content">{{item.time}}</span>
+					</div>
+
+					<div class="itemChild">
+						<span class="title">交易状态</span>
+						<span class="content">{{item.time}}</span>
+					</div>
+				</div>
+							
+			</div>
+		</div>
+
+		<script src="scroller/iscroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="scroller/pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
+		<!-- <script src="js/vue.js" type="text/javascript" charset="utf-8"></script> -->
+		<script type="text/javascript">
+			
+			var tblData = [{
+				time: "2019年4月12日17:38:04"
+			}];
+			refresher.init({
+				id: "wrapper",
+				pullDownAction: Refresh,
+				pullUpAction: Load
+			});
+
+			function Refresh() {
+				this.getData();
+			}
+
+			function Load() {
+				this.getData();
+			}
+
+			function getData() {
+				setTimeout(function() {
+					let eles = "",
+					 temp =
+						`<div class="billItem" >
+						<div class="itemChild">
+							<span class="title">时间</span>
+							<span class="content">${item.time}</span>
+						</div>
+					
+						<div class="itemChild">
+							<span class="title">金额</span>
+							<span class="content">${item.time}</span>
+						</div>
+					
+						<div class="itemChild">
+							<span class="title">交易状态</span>
+							<span class="content">${item.time}</span>
+						</div></div>`;
+					for (i = 0; i < 5; i++) {
+						eles+=tblData.map(item => {
+							return temp;
+						}).join("");
+					}
+					$("#tblData").append(eles);
+					myScroll.refresh(); /****remember to refresh when you action was completed！！！****/
+				}, 1000);
+
+			}
+		</script>
+	</body>
+
+</html>

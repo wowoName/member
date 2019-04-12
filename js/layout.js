@@ -7,17 +7,8 @@ layui.config({
 		navbar = layui.navbar(),
 		tab = layui.tab({
 			elem: '.layout-nav-card', //设置选项卡容器
-			contextMenu:true
+			contextMenu: true
 		});
-
-	//iframe自适应
-	$(window).on('resize', function() {
-		var $content = $('.layout-nav-card .layui-tab-content');
-		$content.height($(this).height() - 165);
-		$content.find('iframe').each(function() {
-			$(this).height($content.height());
-		});
-	}).resize();
 
 	var $menu = $('#menu');
 	$menu.find('li.layui-nav-item').each(function() {
@@ -28,7 +19,7 @@ layui.config({
 			var id = $this.find('a').data('module-id');
 			//这里的数据源只是演示时用的，实际需求可能通过远程读取（根据模块ID来获取对应模块的信息）
 			var url;
-			switch(id) {
+			switch (id) {
 				case 1:
 					url = 'datas/nav_content.json';
 					break;
@@ -38,32 +29,6 @@ layui.config({
 				default:
 					break;
 			}
-			//设置数据源有两个方式。
-			//第一：在此页面通过ajax读取设置  举个栗子：
-			//---------这是第一个栗子----------
-			/*$.getJSON('/api/xxx',{moduleId:id},function(data){
-				navbar.set({
-					elem: '#side',
-					data: data
-				});
-				navbar.render();
-				navbar.on('click(side)', function(data) {
-					tab.tabAdd(data.field);
-				});
-			});*/
-			//------------栗子结束--------------
-			//第二：设置url
-			//---------这是第二个栗子----------
-			/*navbar.set({
-				elem: '#side',
-				url: '/api/xxx?moduleId='+id
-			});
-			navbar.render();
-			navbar.on('click(side)', function(data) {
-				tab.tabAdd(data.field);
-			});*/
-			//------------栗子结束--------------	
-
 			//设置navbar
 			navbar.set({
 				elem: '#side', //存在navbar数据的容器ID
@@ -77,14 +42,12 @@ layui.config({
 				tab.tabAdd(data.field);
 			});
 		});
-
 	});
 	//模拟点击内容管理
 	$('.beg-layout-menu').find('a[data-module-id=1]').click();
-
 	element.on('nav(user)', function(data) {
 		var $a = data.children('a');
-		if($a.data('tab') !== undefined && $a.data('tab')) {
+		if ($a.data('tab') !== undefined && $a.data('tab')) {
 			tab.tabAdd({
 				title: $a.children('cite').text(),
 				//icon: 'fa-user',
@@ -95,7 +58,7 @@ layui.config({
 
 	$('.beg-layout-side-toggle').on('click', function() {
 		var sideWidth = $('.beg-layout-side').width();
-		if(sideWidth === 200) {
+		if (sideWidth === 200) {
 			$('.beg-layout-body').animate({
 				left: '0'
 			});

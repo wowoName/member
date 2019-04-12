@@ -68,6 +68,7 @@ admin-side-toggle .header {
 .header .layui-nav .layui-nav-item {
 	margin: 0 20px;
 	line-height: 66px;
+	z-index: 100000000;
 }
 
 .menu {
@@ -224,26 +225,32 @@ body .layui-layout-admin .footer-demo {
 		opacity: 1;
 		-webkit-transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
 	}
+
 	10% {
 		opacity: 0.8;
 		-webkit-transform: translate3d(-100px, 0px, 0) rotate(10deg) scale(0.7);
 	}
+
 	35% {
 		opacity: 0.6;
 		-webkit-transform: translate3d(100px, 0px, 0) rotate(30deg) scale(0.4);
 	}
+
 	50% {
 		opacity: 0.4;
 		-webkit-transform: translate3d(0, 0, 0) rotate(360deg) scale(0);
 	}
+
 	80% {
 		opacity: 0.2;
 		-webkit-transform: translate3d(0, 0, 0) rotate(720deg) scale(1);
 	}
+
 	90% {
 		opacity: 0.1;
 		-webkit-transform: translate3d(0, 0, 0) rotate(3600deg) scale(6);
 	}
+
 	100% {
 		opacity: 1;
 		-webkit-transform: translate3d(0, 0, 0) rotate(3600deg) scale(1);
@@ -255,26 +262,32 @@ body .layui-layout-admin .footer-demo {
 		opacity: 1;
 		transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
 	}
+
 	10% {
 		opacity: 0.8;
 		transform: translate3d(-100px, 0px, 0) rotate(10deg) scale(0.7);
 	}
+
 	35% {
 		opacity: 0.6;
 		transform: translate3d(100px, 0px, 0) rotate(30deg) scale(0.4);
 	}
+
 	50% {
 		opacity: 0.4;
 		transform: translate3d(0, 0, 0) rotate(360deg) scale(0);
 	}
+
 	80% {
 		opacity: 0.2;
 		transform: translate3d(0, 0, 0) rotate(720deg) scale(1);
 	}
+
 	90% {
 		opacity: 0.1;
 		transform: translate3d(0, 0, 0) rotate(3600deg) scale(6);
 	}
+
 	100% {
 		opacity: 1;
 		transform: translate3d(0, 0, 0) rotate(3600deg) scale(1);
@@ -285,6 +298,7 @@ body .layui-layout-admin .footer-demo {
 	0% {
 		-webkit-transform: scale(1.1);
 	}
+
 	100% {
 		opacity: 1;
 		-webkit-transform: scale(1);
@@ -295,6 +309,7 @@ body .layui-layout-admin .footer-demo {
 	0% {
 		transform: scale(1.1);
 	}
+
 	100% {
 		transform: scale(1);
 	}
@@ -906,10 +921,12 @@ body .site-demo-nav .layui-nav-item {
 		height: 300px;
 		border-radius: 100%;
 	}
+
 	80% {
 		-webkit-filter: blur(50px);
 		opacity: 0.95;
 	}
+
 	100% {
 		-webkit-filter: blur(20px);
 		opacity: 0;
@@ -925,10 +942,12 @@ body .site-demo-nav .layui-nav-item {
 		height: 300px;
 		border-radius: 100%;
 	}
+
 	80% {
 		filter: blur(50px);
 		opacity: 0.95;
 	}
+
 	100% {
 		filter: blur(20px);
 		opacity: 0;
@@ -1229,29 +1248,37 @@ body .site-demo-nav .layui-nav-item {
 		width: auto;
 		margin: 0 10px;
 	}
+
 	.logo,
 	.header-demo .logo {
 		left: 10px;
 	}
+
 	.site-nav-layim {
 		display: none !important;
 	}
+
 	.header .layui-nav .layui-nav-item {
 		margin: 0;
 	}
+
 	.header .layui-nav .layui-nav-item a {
 		padding: 0 15px;
 	}
+
 	.site-banner {
 		height: 300px;
 	}
+
 	.site-banner-bg {
 		background-size: cover;
 	}
+
 	.site-zfj {
 		height: 100px;
 		padding-top: 5px;
 	}
+
 	.site-zfj i {
 		top: 10px;
 		width: 100px;
@@ -1259,16 +1286,20 @@ body .site-demo-nav .layui-nav-item {
 		margin-left: -50px;
 		font-size: 100px;
 	}
+
 	.site-desc {
 		background-size: 70%;
 		margin: 0;
 	}
+
 	.site-desc cite {
 		display: none;
 	}
+
 	.site-download {
 		margin-top: 0;
 	}
+
 	.site-download a {
 		height: 40px;
 		line-height: 40px;
@@ -1278,15 +1309,19 @@ body .site-demo-nav .layui-nav-item {
 		color: #fff;
 		font-size: 16px;
 	}
+
 	.site-download a cite {
 		left: 20px;
 	}
+
 	.site-banner-other {
 		bottom: 15px;
 	}
+
 	.site-idea {
 		margin: 20px 0;
 	}
+
 	.site-idea li {
 		margin: 0 0 20px 0;
 		width: 100%;
@@ -1295,12 +1330,15 @@ body .site-demo-nav .layui-nav-item {
 		-moz-box-sizing: border-box !important;
 		box-sizing: border-box !important;
 	}
+
 	.site-hengfu img {
 		max-width: 100%
 	}
+
 	.layui-layer-dir {
 		display: none;
 	}
+
 	.site-tree {
 		position: fixed;
 		top: 0;
@@ -1313,37 +1351,44 @@ body .site-demo-nav .layui-nav-item {
 		transition: all .3s;
 		-webkit-transition: all .3s;
 	}
+
 	.site-content {
 		width: 100%;
 		padding: 0;
 		overflow: auto;
 	}
+
 	.site-content img {
 		max-width: 100%;
 	}
+
 	.site-tree-mobile {
-		display: block!important;
+		display: block !important;
 		position: fixed;
 		z-index: 100000;
 		bottom: 15px;
 		left: 15px;
-		width: 50px;
-		height: 50px;
-		line-height: 50px;
+		width: 30px;
+		height: 30px;
+		line-height: 30px;
 		border-radius: 2px;
 		text-align: center;
 		background-color: rgba(0, 0, 0, .7);
 		color: #fff;
 	}
+
 	.site-home .site-tree-mobile {
-		display: none!important;
+		display: none !important;
 	}
+
 	.site-mobile .site-tree-mobile {
 		display: none !important;
 	}
+
 	.site-mobile .site-tree {
 		left: 0;
 	}
+
 	.site-mobile .site-mobile-shade {
 		content: '';
 		position: fixed;
@@ -1354,14 +1399,17 @@ body .site-demo-nav .layui-nav-item {
 		background-color: rgba(0, 0, 0, .8);
 		z-index: 9999;
 	}
+
 	.site-tree-mobile i {
-		font-size: 20px;
+		font-size: 18px;
 	}
+
 	.layui-code-view {
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 	}
+
 	.layui-layout-admin .layui-side {
 		position: fixed;
 		top: 0;
@@ -1370,17 +1418,15 @@ body .site-demo-nav .layui-nav-item {
 		-webkit-transition: all .3s;
 		z-index: 10000;
 	}
-	.layui-body {
-		position: static;
-		bottom: 0;
-		left: 0;
-	}
+
 	.site-mobile .layui-side {
 		left: 0;
 	}
+
 	body .layui-layout-admin .footer-demo {
 		position: static;
 	}
+
 	.site-demo-area,
 	.site-demo-editor,
 	.site-demo-result,
@@ -1389,23 +1435,29 @@ body .site-demo-nav .layui-nav-item {
 		position: static;
 		width: 100%;
 	}
+
 	.site-demo-editor textarea {
 		height: 350px;
 	}
+
 	.site-demo-zanzhu {
 		display: none;
 	}
+
 	.site-demo-btn {
 		bottom: auto;
 		top: 370px;
 	}
+
 	.site-demo-result iframe {
 		height: 500px;
 	}
+
 	.site-demo-laytpl textarea,
 	.site-demo-laytpl div span {
 		margin: 0;
 	}
+
 	.site-demo-tplres .site-demo-tplh2,
 	.site-demo-tplres .site-demo-tplview {
 		width: 100%;
@@ -1413,24 +1465,29 @@ body .site-demo-nav .layui-nav-item {
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 	}
+
 	.site-demo-title {
 		position: static;
 		left: 0;
 	}
+
 	body .layui-layout-admin .site-demo {}
+
 	.site-demo-code {
 		position: static;
 		height: 350px;
 	}
+
 	.admin-side-toggle,
 	.admin-header-item {
 		display: none;
 	}
+
 	.admin-header-item-mobile {
 		display: block;
 	}
 }
 
 .layui-anim-upbit a {
-	color: #333!important;
+	color: #333 !important;
 }

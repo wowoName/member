@@ -1,12 +1,3 @@
-.admin-main {
-	margin: 15px;
+.wrapper{
+	padding: 10px 20px;
 }
-
-.admin-main .layui-field-title .layui-field-box {
-	padding: 10px 30px;
-}
-
-.admin-main .layui-field-title .layui-field-box p {
-	padding: 5px 0;
-}
-

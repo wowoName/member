@@ -11,18 +11,12 @@
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="format-detection" content="telephone=no">
-		<link rel="shortcut icon" href="images/logoIcon.ico" />
-		<!--<link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />-->
-		
+		<link rel="shortcut icon" href="images/logo.jpg" />
 		<link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
 		<link rel="stylesheet" href="css/global.css" media="all">
 		<link rel="stylesheet" href="plugins/font-awesome/css/font-awesome.min.css">
-		<style type="text/css">
-			.quanx {
-				color: #FF6347;
-			}
-		</style>
-
+		<link rel="stylesheet" type="text/css" href="css/indexmobile.css" />
+	
 	</head>
 
 	<body>
@@ -39,21 +33,12 @@
 						</div>
 					</div>
 					<ul class="layui-nav admin-header-item">
-						<li class="layui-nav-item layui-this" id="navRecApply">
+						<!-- <li class="layui-nav-item layui-this" >
 							<a href="javascript:;">入金</a>
-						</li>
-						<li class="layui-nav-item" id="navRecMan">
-							<a href="javascript:;">出金</a>
-						</li>
-						<li class="layui-nav-item" id="navBusinessMan">
-							<a href="javascript:;">出入金明细</a>
-						</li>
-						<li class="layui-nav-item" id="navSys">
-							<a href="javascript:;">信息更改</a>
-						</li>
+						</li> -->
 						<li class="layui-nav-item">
 							<a href="javascript:;" class="admin-header-user">
-								<img src="images/0.jpg" />
+								<img src="images/userImg.jpg" />
 								<span>王小孟</span>
 							</a>
 							<dl class="layui-nav-child">
@@ -63,7 +48,6 @@
 								<dd>
 									<a href="javascript:;"><i class="fa fa-gear" aria-hidden="true"></i> 退出</a>
 								</dd>
-
 							</dl>
 						</li>
 					</ul>
@@ -77,86 +61,33 @@
 			<div class="layui-side layui-bg-black" id="admin-side">
 				<div class="layui-side-scroll" id="admin-navbar-side" lay-filter="side"></div>
 			</div>
-			<div class="layui-body" style="bottom: 0;border-left: solid 2px #4B5064;background-color: #f3f3f4;" id="admin-body">
+			<div class="layui-body" id="admin-body">
 				<div class="layui-tab admin-nav-card layui-tab-brief" lay-filter="admin-tab" style="margin: 0;">
 					<ul class="layui-tab-title">
 						<li class="layui-this " lay-id="default">
 							<i class="fa fa-file-archive-o" aria-hidden="true"></i>
-							<cite>备案申报</cite>
+							<cite>瑞讯集团</cite>
 						</li>
 					</ul>
-					<div class="layui-tab-content" style="min-height: 150px; padding: 0;">
-						<div class="layui-tab-item layui-show">
+					<div class="layui-tab-content">
+						<div class="layui-tab-item layui-show" id="mainIframe">
 							<!--默认打开页-->
 							<iframe src="main.html"></iframe>
 						</div>
 					</div>
 				</div>
 			</div>
-
+			<!-- 移动端展开导航 遮罩 -->
+			<div class="site-mobile-shade"></div>
+			<!-- 移动端显示左侧导航 -->
 			<div class="site-tree-mobile layui-hide">
 				<i class="layui-icon">&#xe602;</i>
 			</div>
-			<div class="site-mobile-shade"></div>
-			<!--锁屏模板 end -->
-		<!--	<script type="text/javascript" src="plugins/layui/layui.js"></script>-->
-		<script type="text/javascript" src="plugins/layui/layui.js"></script>
+			<!--	<script type="text/javascript" src="plugins/layui/layui.js"></script>-->
+			<script type="text/javascript" src="plugins/layui/layui.js"></script>
 			<script type="text/javascript" src="datas/nav.js"></script>
 			<script src="js/index.js"></script>
-			<script>
-				layui.use(['layer', 'navbar'], function() {
-					var $ = layui.jquery,
-						layer = layui.layer,
-						navbar = layui.navbar();
-
-					$("#navRecApply").on("click", function() {
-						setNav(1);
-					});
-					$("#navRecMan").on("click", function() {
-						setNav(2);
-					});
-					$("#navBusinessMan").on("click", function() {
-						setNav(3);
-					});
-					$("#navSys").on("click", function() {
-						setNav(4);
-					});
-
-					//设置左侧导航
-					function setNav(type) {
-
-						var datas = [];
-						switch(type) {
-							case 1:
-								datas = navRecApply;
-								break;
-							case 2:
-								datas = navRecMan;
-								break;
-							case 3:
-								datas = navBusinessMan;
-								break;
-							case 4:
-								datas = navSys;
-								break;
-						}
-						//设置navbar
-						navbar.set({
-							spreadOne: true,
-							elem: '#admin-navbar-side',
-							cached: true,
-							data: datas
-						});
-						//渲染navbar
-						navbar.render();
-						//监听点击事件
-						navbar.on('click(side)', function(data) {
-							tab.tabAdd(data.field);
-						});
-					}
-
-				});
-			</script>
+			
 		</div>
 	</body>
 

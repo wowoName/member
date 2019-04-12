@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="shortcut icon" href="images/logo.jpg" />
+		<title>会员--出金</title>
+		<link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="css/login.css" />
+		
+		<link rel="stylesheet" type="text/css" href="plugins/font-awesome/css/font-awesome.css" />
+	</head>
+
+	<body class="beg-login-bg">
+		<div class="login-con">
+			<div class="beg-login-box gold-box">
+				<header>
+					<h1>出金申请</h1>
+				</header>
+				<div class="beg-login-main">
+					<form action="/manage/login" class="layui-form" method="post">
+						<div class="layui-form-item">
+							<label class="beg-login-icon">
+								<i class="fa fa-user-o"></i>
+							</label>
+							<div class="inputItem">
+								刘晓萌
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<label class="beg-login-icon">
+								<i class="fa fa-linkedin"></i>
+							</label>
+							<div class="inputItem" id="walletAddress">
+								wwsdfdsfdasfadsfad2343454553456764gfgfhdgfh564
+							</div>
+						</div>
+
+						<div class="layui-form-item">
+							<label class="beg-login-icon">
+								<img src="images/money.png" alt="" class="inputIcon">
+							</label>
+							<input type="phone" id="outMoney" autocomplete="off" placeholder="请输入出金金额" class="layui-input">
+						</div>
+
+						<div class="layui-form-item">
+							<button class="layui-btn layui-btn-normal lisu-loginBtn" lay-submit lay-filter="login">
+								申请
+							</button>
+						</div>
+
+					</form>
+					<div class="loginbottom">
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/lisuUtils.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="plugins/layui/layui.js"></script>
+		<script>
+			layui.use(['layer', 'form'], function() {
+				var layer = layui.layer,
+					$ = layui.jquery,
+					form = layui.form();
+				$("#walletAddress").on("click", function() {
+					layer.tips('wwsdfdsfdasfadsfad2343454553456764gfgfhdgfh564', '#walletAddress', {
+						tips: [3, "#78BA32"]
+					});
+				});
+				lisuUtils.number($("#outMoney"));
+			});
+		</script>
+	</body>
+
+</html>
