@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link rel="stylesheet" type="text/css" href="plugins/newLayui/css/layui.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
-    <title>出入金明细</title>
+    <title>客户统计</title>
 </head>
 
 <body>
@@ -20,21 +20,12 @@
                     <form class="layui-form" action="">
                         <div class="layui-form-item">
                             <div class="layui-inline">
-                                <label class="layui-form-label">账号：</label>
+                                <label class="layui-form-label">邮箱地址：</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" id="searchVal" placeholder="请输入查询账号">
+                                    <input type="text" class="layui-input" id="searchVal" placeholder="请输入邮箱地址">
                                 </div>
                             </div>
-                            <div class="layui-inline">
-                                <label class="layui-form-label">交易时间：</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" id="startTime" placeholder="请选择开始时间">
-                                </div>
-                                <label class="layui-form-label" style="text-align: center;padding: 9px 10px 9px 0px;">至</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" id="endTime" placeholder="请选择结束时间">
-                                </div>
-                            </div>
+
 
                             <div class="layui-inline">
                                 <button class="layui-btn layui-btn-normal" type="button" id="reloadTbl"><i class="layui-icon layui-icon-search"
@@ -93,27 +84,20 @@
                     cols: [
                         [{
                             field: 'name',
-                            title: '时间',
+                            title: '姓名',
                             width: 120
                         }, {
                             field: 'name',
-                            title: '转入账户',
+                            title: '电话',
                             width: 120
                         }, {
                             field: 'name',
-                            title: '转出账户',
+                            title: '钱包地址',
                         }, {
                             field: 'name',
-                            title: '金额',
-                            width: 120
-                        }, {
-                            field: 'name',
-                            title: '交易状态',
-                            width: 120
-                        }, {
-                            field: 'name',
-                            title: '备注',
-                            width: 120
+                            title: '交易账号',
+                            width: 120,
+
                         }]
                     ],
                     page: true,
@@ -124,37 +108,7 @@
                 });
             }
             initTbl();
-            laydate.render({
-                elem: '#startTime',
-                done: function(value, date, endDate) {
-                    setTimeout(function() {
-                        var eTime = $("#endTime").val();
-                        if (value && eTime && value > eTime) {
-                            $("#endTime").val(value);
-                            $("#startTime").val(eTime);
-                        }
-                    }, 100)
-                }
-            });
-            laydate.render({
-                    elem: '#endTime',
-                    done: function(value, date, endDate) {
-                        setTimeout(function() {
-                            var sTime = $("#startTime").val();
-                            if (value && sTime && value < sTime) {
-                                $("#startTime").val(value);
-                                $("#endTime").val(sTime);
-                            }
-                        }, 100)
-                    }
-                })
-                //监听行单击事件（单击事件为：rowDouble）
-            table.on('rowDouble(leaguerTbl)', function(obj) {
-                var data = obj.data;
-                openLayer(data);
-                //标注选中样式
-                obj.tr.addClass('layui-table-click').siblings().removeClass('layui-table-click');
-            });
+
             //查询
             $("#reloadTbl").on("click", function() {
                 layer.load(0);

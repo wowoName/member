@@ -1,3 +1,67 @@
-.wrapper{
-	padding: 10px 20px;
+body {
+    background: url(../images/loginBg.jpg);
+    padding: 10px 20px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.welcomeInfo {
+    width: 100%;
+    padding: 20px 20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.welcomeInfo img {
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+.notice {
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #67aaf5;
+    color: #ffffff;
+}
+
+.mainBottom {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 20px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #ffffff;
+    text-align: center;
+    background-color: rgba(0, 0, 0, .8);
+}
+
+@media screen and (max-width: 750px) {
+    body {
+        padding: 10px 0;
+    }
+    .welcomeInfo {
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .notice {
+        border-radius: 0
+    }
+    .mainBottom {
+        padding: 15px 10px;
+    }
 }

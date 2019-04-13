@@ -1,5 +1,5 @@
 /** navbar.js By Beginner Emain:zheng_jinfan@126.com HomePage:http://www.zhengjinfan.cn */
-layui.define(['element', 'common'], function (exports) {
+layui.define(['element', 'common'], function(exports) {
     "use strict";
     var $ = layui.jquery,
         layer = parent.layer === undefined ? layui.layer : parent.layer,
@@ -7,10 +7,10 @@ layui.define(['element', 'common'], function (exports) {
         common = layui.common,
         cacheName = 'tb_navbar';
 
-    var Navbar = function () {
-		/**
-		 *  默认配置 
-		 */
+    var Navbar = function() {
+        /**
+         *  默认配置 
+         */
         this.config = {
             elem: undefined, //容器
             data: undefined, //数据源
@@ -22,17 +22,17 @@ layui.define(['element', 'common'], function (exports) {
         this.v = '1.0.0';
     };
     //渲染
-    Navbar.prototype.render = function () {
+    Navbar.prototype.render = function() {
         var _that = this;
         var _config = _that.config;
-        if (typeof (_config.elem) !== 'string' && typeof (_config.elem) !== 'object') {
+        if (typeof(_config.elem) !== 'string' && typeof(_config.elem) !== 'object') {
             common.throwError('Navbar error: elem参数未定义或设置出错，具体设置格式请参考文档API.');
         }
         var $container;
-        if (typeof (_config.elem) === 'string') {
+        if (typeof(_config.elem) === 'string') {
             $container = $('' + _config.elem + '');
         }
-        if (typeof (_config.elem) === 'object') {
+        if (typeof(_config.elem) === 'object') {
             $container = _config.elem;
         }
         if ($container.length === 0) {
@@ -41,7 +41,7 @@ layui.define(['element', 'common'], function (exports) {
         if (_config.data === undefined && _config.url === undefined) {
             common.throwError('Navbar error:请为Navbar配置数据源.')
         }
-        if (_config.data !== undefined && typeof (_config.data) === 'object') {
+        if (_config.data !== undefined && typeof(_config.data) === 'object') {
             var html = getHtml(_config.data);
             $container.html(html);
             element.init();
@@ -55,7 +55,7 @@ layui.define(['element', 'common'], function (exports) {
                         url: _config.url,
                         async: false, //_config.async,
                         dataType: 'json',
-                        success: function (result, status, xhr) {
+                        success: function(result, status, xhr) {
                             //添加缓存
                             layui.data(cacheName, {
                                 key: 'navbar',
@@ -65,10 +65,10 @@ layui.define(['element', 'common'], function (exports) {
                             $container.html(html);
                             element.init();
                         },
-                        error: function (xhr, status, error) {
+                        error: function(xhr, status, error) {
                             common.msgError('Navbar error:' + error);
                         },
-                        complete: function (xhr, status) {
+                        complete: function(xhr, status) {
                             _that.config.elem = $container;
                         }
                     });
@@ -86,15 +86,15 @@ layui.define(['element', 'common'], function (exports) {
                     url: _config.url,
                     async: false, //_config.async,
                     dataType: 'json',
-                    success: function (result, status, xhr) {
+                    success: function(result, status, xhr) {
                         var html = getHtml(result);
                         $container.html(html);
                         element.init();
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         common.msgError('Navbar error:' + error);
                     },
-                    complete: function (xhr, status) {
+                    complete: function(xhr, status) {
                         _that.config.elem = $container;
                     }
                 });
@@ -104,33 +104,33 @@ layui.define(['element', 'common'], function (exports) {
         //只展开一个二级菜单
         if (_config.spreadOne) {
             var $ul = $container.children('ul');
-            $ul.find('li.layui-nav-item').each(function () {
-                $(this).on('click', function () {
+            $ul.find('li.layui-nav-item').each(function() {
+                $(this).on('click', function() {
                     $(this).siblings().removeClass('layui-nav-itemed');
                 });
             });
         }
         return _that;
     };
-	/**
-	 * 配置Navbar
-	 * @param {Object} options
-	 */
-    Navbar.prototype.set = function (options) {
+    /**
+     * 配置Navbar
+     * @param {Object} options
+     */
+    Navbar.prototype.set = function(options) {
         var that = this;
         that.config.data = undefined;
         $.extend(true, that.config, options);
         return that;
     };
-	/**
-	 * 绑定事件
-	 * @param {String} events
-	 * @param {Function} callback
-	 */
-    Navbar.prototype.on = function (events, callback) {
+    /**
+     * 绑定事件
+     * @param {String} events
+     * @param {Function} callback
+     */
+    Navbar.prototype.on = function(events, callback) {
         var that = this;
         var _con = that.config.elem;
-        if (typeof (events) !== 'string') {
+        if (typeof(events) !== 'string') {
             common.throwError('Navbar error:事件名配置出错，请参考API文档.');
         }
         var lIndex = events.indexOf('(');
@@ -138,11 +138,11 @@ layui.define(['element', 'common'], function (exports) {
         var filter = events.substring(lIndex + 1, events.indexOf(')'));
         if (eventName === 'click') {
             if (_con.attr('lay-filter') !== undefined) {
-                _con.children('ul').find('li').each(function () {
+                _con.children('ul').find('li').each(function() {
                     var $this = $(this);
                     if ($this.find('dl').length > 0) {
-                        var $dd = $this.find('dd').each(function () {
-                            $(this).on('click', function () {
+                        var $dd = $this.find('dd').each(function() {
+                            $(this).on('click', function() {
                                 var $a = $(this).children('a');
                                 var href = $a.data('url');
                                 var icon = $a.children('i:first').data('icon');
@@ -159,7 +159,7 @@ layui.define(['element', 'common'], function (exports) {
                             });
                         });
                     } else {
-                        $this.on('click', function () {
+                        $this.on('click', function() {
                             var $a = $this.children('a');
                             var href = $a.data('url');
                             var icon = $a.children('i:first').data('icon');
@@ -179,18 +179,17 @@ layui.define(['element', 'common'], function (exports) {
             }
         }
     };
-	/**
-	 * 清除缓存
-	 */
-    Navbar.prototype.cleanCached = function () {
+    /**
+     * 清除缓存
+     */
+    Navbar.prototype.cleanCached = function() {
         layui.data(cacheName, null);
     };
-	/**
-	 * 获取html字符串
-	 * @param {Object} data
-	 */
+    /**
+     * 获取html字符串
+     * @param {Object} data
+     */
     function getHtml(data) {
-        //debugger;
         var ulHtml = '<ul class="layui-nav layui-nav-tree beg-navbar">';
         for (var i = 0; i < data.length; i++) {
             if (data[i].spread) {
@@ -204,7 +203,8 @@ layui.define(['element', 'common'], function (exports) {
                     if (data[i].icon.indexOf('fa-') !== -1) {
                         ulHtml += '<i class="fa ' + data[i].icon + '" aria-hidden="true" data-icon="' + data[i].icon + '"></i>';
                     } else {
-                        ulHtml += '<i class="layui-icon" data-icon="' + data[i].icon + '">' + data[i].icon + '</i>';
+                        // ulHtml += '<i class="layui-icon" data-icon="' + data[i].icon + '">' + data[i].icon + '</i>';
+                        ulHtml += '<img class="navImg"  src="' + data[i].icon + '"/>';
                     }
                 }
                 ulHtml += '<cite>' + data[i].title + '</cite>'
@@ -217,7 +217,8 @@ layui.define(['element', 'common'], function (exports) {
                         if (data[i].children[j].icon.indexOf('fa-') !== -1) {
                             ulHtml += '<i class="fa ' + data[i].children[j].icon + '" data-icon="' + data[i].children[j].icon + '" aria-hidden="true"></i>';
                         } else {
-                            ulHtml += '<i class="layui-icon" data-icon="' + data[i].children[j].icon + '">' + data[i].children[j].icon + '</i>';
+                            ulHtml += '<img class="navImg"  src="' + data[i].children[j].icon + '"/>';
+                            // ulHtml += '<i class="layui-icon" data-icon="' + data[i].children[j].icon + '">' + data[i].children[j].icon + '</i>';
                         }
                     }
                     ulHtml += '<cite>' + data[i].children[j].title + '</cite>';
@@ -232,7 +233,8 @@ layui.define(['element', 'common'], function (exports) {
                     if (data[i].icon.indexOf('fa-') !== -1) {
                         ulHtml += '<i class="fa ' + data[i].icon + '" aria-hidden="true" data-icon="' + data[i].icon + '"></i>';
                     } else {
-                        ulHtml += '<i class="layui-icon" data-icon="' + data[i].icon + '">' + data[i].icon + '</i>';
+                        // ulHtml += '<i class="layui-icon" data-icon="' + data[i].icon + '">' + data[i].icon + '</i>';
+                        ulHtml += '<img class="navImg"  src="' + data[i].icon + '"/>';
                     }
                 }
                 ulHtml += '<cite>' + data[i].title + '</cite>'
@@ -247,7 +249,7 @@ layui.define(['element', 'common'], function (exports) {
 
     var navbar = new Navbar();
 
-    exports('navbar', function (options) {
+    exports('navbar', function(options) {
         return navbar.set(options);
     });
 });

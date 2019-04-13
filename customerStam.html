@@ -6,7 +6,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>出入金明细--</title>
+    <title>客户统计</title>
     <link rel="stylesheet" type="text/css" href="scroller/pullToRefresh.css" />
     <link rel="stylesheet" type="text/css" href="css/billDm.css" />
 
@@ -39,8 +39,8 @@
     <script src="scroller/pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
         function redirectUrl() {
-            if ($("#navTitle", parent.document).css("display") != "none")
-                window.location.href = "billDetails.html";
+            if ($("#navTitle", parent.document).css("display") == "none")
+                window.location.href = "customerSta.html";
         }
         $(window).on("resize", function() {
             redirectUrl();
