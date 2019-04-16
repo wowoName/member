@@ -19,22 +19,22 @@
             <header>
                 <h1>会员登录</h1>
             </header>
-            <div class="beg-login-main">
+            <div class="beg-login-main" id="registeredCon">
                 <form action="/manage/login" class="layui-form" method="post">
                     <div class="layui-form-item">
                         <label class="beg-login-icon">
                          <i class="fa fa-envelope" aria-hidden="true"></i>
                     </label>
-                        <input type="text" name="userName" autocomplete="off" placeholder="请输入邮箱地址" class="layui-input">
+                        <input type="text" name="email" autocomplete="off" placeholder="请输入邮箱地址" class="layui-input">
                     </div>
                     <div class="layui-form-item">
                         <label class="beg-login-icon">
                         <i class="layui-icon">&#xe642;</i>
                     </label>
-                        <input type="password" name="password" autocomplete="off" placeholder="请输入密码" class="layui-input">
+                        <input type="password" name="loginPass" autocomplete="off" placeholder="请输入密码" class="layui-input">
                     </div>
                     <div class="layui-form-item">
-                        <button class="layui-btn layui-btn-normal lisu-loginBtn" lay-submit lay-filter="login">
+                        <button class="layui-btn layui-btn-normal lisu-loginBtn" type="button" id="addHandler" lay-submit lay-filter="login">
                             登录
                         </button>
                     </div>
@@ -54,10 +54,50 @@
             var layer = layui.layer,
                 $ = layui.jquery,
                 form = layui.form();
+            $("#addHandler").on("click", function() {
+                lisuUtils.requireForm("registeredCon");
+                var params = lisuUtils.getParams("registeredCon");
+                if (params.loginPass == "") {
+                    layer.msg("请输入登录密码");
+                    $("#loginPass").focus();
+                    return;
+                }
+                if (params.email == "") {
+                    layer.msg("请输入邮箱地址");
+                    return;
+                } else if (!(/^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/.test(params.email))) {
+                    layer.msg("请输入正确邮箱地址!");
+                    return;
+                }
+                return $.ajax({
+                    url: "http://146.196.77.87/regCenter/api/user/login",
+                    type: "post",
+                    beforeSend: function() {
+                        layer.load(2);
+                        $("#addHandler").prop("disabled", true)
+                    },
+                    complete: function() {
+                        layer.closeAll("loading");
+                        $("#addHandler").prop("disabled", false)
+                    },
+                    data: params,
+                    dataType: "json",
+                    sucess: function(res) {
+                        if (res.return == "false") {
+                            layer.msg(res.msg);
+                            return;
+                        } else {
+                            //保存用户的等级
+                            window.localStorage.setItem("rxRole", res.role);
+                            window.localStorage.setItem("rxUserName", res.info.name);
+                            window.localStorage.setItem("rxUserId", res.info.id);
+                            window.location.href = "index.html";
+                        }
+                    },
+                    error: function() {
 
-            form.on('submit(login)', function(data) {
-                location.href = 'index.html';
-                return false;
+                    }
+                })
             });
         });
     </script>

@@ -39,7 +39,7 @@
 
 .regisred {
     width: 450px;
-    margin: 10% auto;
+    margin: 10% auto 0 auto;
     border-radius: 10px;
     color: #000000;
     background-color: #FFFFFF;
@@ -194,10 +194,10 @@
     }
     .regisred {
         position: absolute;
-        top: 40%;
+        top: 30%;
         left: 50%;
-        -webkit-transform: translate(-50%, -40%);
-        transform: translate(-50%, -40%);
+        -webkit-transform: translate(-50%, -30%);
+        transform: translate(-50%, -30%);
         width: 90%;
     }
     .beg-login-box .beg-login-main,
@@ -214,4 +214,8 @@
     header h1 {
         font-size: 20px!important;
     }
+}
+
+.lisu-error-active {
+    border: 1px solid #FF6347;
 }

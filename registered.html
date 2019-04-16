@@ -2,83 +2,159 @@
 
 <html>
 
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-		<link rel="shortcut icon" href="images/logo.jpg" />
-		<title>会员注册</title>
-		<link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
-		<link rel="stylesheet" href="css/login.css" />
-		<link rel="stylesheet" type="text/css" href="plugins/font-awesome/css/font-awesome.css" />
-	</head>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="shortcut icon" href="images/logo.jpg" />
+    <title>会员注册</title>
+    <link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" type="text/css" href="plugins/font-awesome/css/font-awesome.css" />
+</head>
 
-	<body class="beg-login-bg">
-		<div class="regisred-con">
-			<div class="regisred">
-				<header>
-					<h1>注册会员</h1>
-				</header>
-				<div class="beg-login-main">
-					<form action="/manage/login" class="layui-form" method="post">
-						<div class="layui-form-item">
-							<label class="beg-login-icon">
+<body class="beg-login-bg">
+    <div class="regisred-con">
+        <div class="regisred">
+            <header>
+                <h1>注册会员</h1>
+            </header>
+            <div class="beg-login-main" id="registeredCon">
+                <form class="layui-form">
+                    <div class="layui-form-item">
+                        <label class="beg-login-icon">
                          <i class="fa fa-envelope" aria-hidden="true"></i>
                     </label>
-							<input type="text" name="userName" autocomplete="off" placeholder="请输入邮箱地址" class="layui-input">
-						</div>
-						<div class="layui-form-item">
-							<label class="beg-login-icon">
+                        <input type="text" name="email" autocomplete="off" lisu-re="邮箱地址" placeholder="请输入邮箱地址" class="layui-input">
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="beg-login-icon">
+                         <i class="fa fa-key fa-fw" aria-hidden="true"></i>
+                    </label>
+                        <input type="text" name="loginPass" autocomplete="off" placeholder="请输入密码" class="layui-input">
+                    </div>
+
+                    <div class="layui-form-item">
+                        <label class="beg-login-icon">
                          <i class="fa fa-user" aria-hidden="true"></i>
                     </label>
-							<input type="text" name="userName" autocomplete="off" placeholder="请输入姓名" class="layui-input">
-						</div>
-						<div class="layui-form-item">
-							<label class="beg-login-icon">
+                        <input type="text" name="name" autocomplete="off" placeholder="请输入姓名" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="beg-login-icon">
                          <i class="fa fa-id-card" aria-hidden="true"></i>
                     </label>
-							<input type="text" name="userName" autocomplete="off" placeholder="请输入身份证号码" class="layui-input">
-						</div>
-						<div class="layui-form-item">
-							<label class="beg-login-icon">
+                        <input type="text" name="idnum" autocomplete="off" placeholder="请输入身份证号码" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="beg-login-icon">
                          <i class="fa fa-phone" aria-hidden="true"></i>
                     </label>
-							<input type="text" name="userName" autocomplete="off" placeholder="请输入电话号码" class="layui-input">
-						</div>
-						<div class="layui-form-item">
-							<label class="beg-login-icon">
+                        <input type="text" name="phoneNum" autocomplete="off" placeholder="请输入电话号码" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="beg-login-icon">
                         <i class="fa fa-google-wallet" aria-hidden="true"></i>
                     </label>
-							<input type="text" name="userName" autocomplete="off" placeholder="请输入钱包地址" class="layui-input">
-						</div>
-						<div class="layui-form-item">
-							<label class="beg-login-icon">
+                        <input type="text" name="address" autocomplete="off" placeholder="请输入钱包地址" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="beg-login-icon">
                          <i class="fa fa-qrcode" aria-hidden="true"></i>
                     </label>
-							<input type="password" name="password" autocomplete="off" placeholder="请输入推荐码" class="layui-input">
-						</div>
-						<div class="layui-form-item">
-							<button class="layui-btn layui-btn-normal lisu-loginBtn" lay-submit lay-filter="login">
+                        <input type="text" name="recommend" autocomplete="off" placeholder="请输入推荐码" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                        <button class="layui-btn layui-btn-normal lisu-loginBtn" type="button" id="addHandler" lay-submit lay-filter="login">
                              注册
                         </button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<script type="text/javascript" src="plugins/layui/layui.js"></script>
-		<script>
-			layui.use(['layer', 'form'], function() {
-				var layer = layui.layer,
-					$ = layui.jquery,
-					form = layui.form();
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/lisuUtils.js"></script>
+    <script type="text/javascript" src="plugins/layui/layui.js"></script>
+    <script>
+        layui.use(['layer', 'form'], function() {
+            var layer = layui.layer,
+                $ = layui.jquery,
+                form = layui.form();
+            $("#addHandler").on("click", function() {
+                lisuUtils.requireForm("registeredCon");
+                var params = lisuUtils.getParams("registeredCon"),
+                    idnumTest = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+                if (params.loginPass == "") {
+                    layer.msg("请输入登录密码");
+                    $("#loginPass").focus();
+                    return;
+                } else if (!/^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/.test(params.loginPass)) {
+                    layer.msg("密码最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符");
+                    return;
+                }
+                if (params.idnum == "") {
+                    layer.msg("请输入身份证号");
+                    return;
+                } else if (!idnumTest.test(params.idnum)) {
+                    layer.msg("身份证号有误");
+                    return;
+                }
+                if (params.address == "") {
+                    layer.msg("请输入钱包地址");
+                    return;
+                }
+                if (params.recommend == "") {
+                    layer.msg("请输入推荐码");
+                    return;
+                }
+                if (params.phoneNum == "") {
+                    layer.msg("请输入电话号码");
+                    return;
+                } else if (!(/^1[34578]\d{9}$/.test(params.phoneNum))) {
+                    layer.msg("请输入正确的电话号码!");
+                    return;
+                }
+                if (params.name == "") {
+                    layer.msg("请输入姓名");
+                    return;
+                }
+                if (params.email == "") {
+                    layer.msg("请输入邮箱地址");
+                    return;
+                } else if (!(/^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/.test(params.email))) {
+                    layer.msg("请输入正确邮箱地址!");
+                    return;
+                }
+                return $.ajax({
+                    url: "http://146.196.77.87/regCenter/api/user/save",
+                    type: "post",
+                    beforeSend: function() {
+                        layer.load(2);
+                        $("#addHandler").prop("disabled", true)
+                    },
+                    complete: function() {
+                        layer.closeAll("loading");
+                        $("#addHandler").prop("disabled", false)
+                    },
+                    data: params,
+                    dataType: "json",
+                    sucess: function(res) {
+                        if (res.code == "false") {
+                            layer.msg(res.msg);
+                            return;
+                        } else {
+                            window.location.href = "index.html";
+                        }
+                    },
+                    error: function() {
 
-				form.on('submit(login)', function(data) {
-					location.href = 'index.html';
-					return false;
-				});
-			});
-		</script>
-	</body>
+                    }
+                })
+            });
+        });
+    </script>
+</body>
 
 </html>
