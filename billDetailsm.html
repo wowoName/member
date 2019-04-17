@@ -90,7 +90,6 @@
 				}
 				getData();
 			}
-
 			function getData() {
 				$.ajax({
 					url: "http://146.196.77.87/regCenter/api/user/login",
@@ -108,7 +107,7 @@
 					sucess: function(res) {
 						var datas = res.list;
 						if (datas.length == 0) {
-							refresher.info.pullUpLable = "我是有底线的";
+							refresher.info.pullUpLable = "无更多数据";
 							finish = true;
 							myScroll.refresh();
 						} else {
