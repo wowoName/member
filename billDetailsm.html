@@ -1,55 +1,21 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>出入金明细--</title>
-    <link rel="stylesheet" type="text/css" href="scroller/pullToRefresh.css" />
-    <link rel="stylesheet" type="text/css" href="css/billDm.css" />
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<title>出入金明细--</title>
+		<link rel="stylesheet" type="text/css" href="scroller/pullToRefresh.css" />
+		<link rel="stylesheet" type="text/css" href="css/billDm.css" />
 
-</head>
+	</head>
 
-<body>
-    <div id="wrapper">
-        <div class="detailCon" id="tblData">
-            <div class="billItem">
-                <div class="itemChild">
-                    <span class="title">时间</span>
-                    <span class="content">2019年4月12日19:34:55</span>
-                </div>
-
-                <div class="itemChild">
-                    <span class="title">金额</span>
-                    <span class="content">2019年4月12日</span>
-                </div>
-
-                <div class="itemChild">
-                    <span class="title">交易状态</span>
-                    <span class="content">2019年4月12日</span>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="scroller/iscroll.js" type="text/javascript" charset="utf-8"></script>
-    <script src="scroller/pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript">
-        function redirectUrl() {
-            if ($("#navTitle", parent.document).css("display") != "none")
-                window.location.href = "billDetails.html";
-        }
-        $(window).on("resize", function() {
-            redirectUrl();
-        });
-        var tblData = [{
-                time: "2019年4月12日17:38:04"
-            }],
-            temPlate = `
-			<div class="billItem">
+	<body>
+		<div id="wrapper">
+			<div class="detailCon" id="tblData">
+				<div class="billItem">
 					<div class="itemChild">
 						<span class="title">时间</span>
 						<span class="content">2019年4月12日19:34:55</span>
@@ -64,43 +30,102 @@
 						<span class="title">交易状态</span>
 						<span class="content">2019年4月12日</span>
 					</div>
-				</div>`;
-        count = 1,
-            finish = false;
-        refresher.init({
-            id: "wrapper",
-            pullDownAction: Refresh,
-            pullUpAction: Load
-        });
+				</div>
 
-        function Refresh() {
-            getData()
-        }
+			</div>
+		</div>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="scroller/iscroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="scroller/pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function redirectUrl() {
+				if ($("#navTitle", parent.document).css("display") != "none")
+					window.location.href = "billDetails.html";
+			}
+			$(window).on("resize", function() {
+				redirectUrl();
+			});
+			var tblData = [{
+					time: "2019年4月12日17:38:04"
+				}],
+				temPlate =
+				`
+			<div class="billItem">
+			<div class="itemChild">
+				<span class="title">类型</span>
+				<span class="content">${v.type}</span>
+			</div>
+					<div class="itemChild">
+						<span class="title">时间</span>
+						<span class="content">${v.create}</span>
+					</div>
 
-        function Load() {
-            if (finish) {
-                myScroll.refresh();
-                return;
-            }
-            getData();
-        }
+					<div class="itemChild">
+						<span class="title">金额</span>
+						<span class="content">${v.amount}</span>
+					</div>
 
-        function getData() {
-            setTimeout(function() {
-                var elems = "";
-                for (var i = 0; i < 5; i++) {
-                    elems += temPlate;
-                }
-                $("#tblData").append(elems);
-                count++;
-                myScroll.refresh();
-                if (count > 3) {
-                    refresher.info.pullUpLable = "我是有底线的";
-                    finish = true;
-                };
-            }, 1000);
-        }
-    </script>
-</body>
+					<div class="itemChild">
+						<span class="title">交易状态</span>
+						<span class="content">${v.state}</span>
+					</div>
+				</div>`,
+				count = 1,
+				finish = false;
+			refresher.init({
+				id: "wrapper",
+				pullDownAction: Refresh,
+				pullUpAction: Load
+			});
+			//下拉刷新
+			function Refresh() {
+				count=1;//页数重置为1
+				finish = false;
+				getData();
+			}
+			function Load() {
+				if (finish) {
+					myScroll.refresh();
+					return;
+				}
+				getData();
+			}
+
+			function getData() {
+				$.ajax({
+					url: "http://146.196.77.87/regCenter/api/user/login",
+					type: "post",
+					beforeSend: function() {
+						layer.load(2);
+						$("#addHandler").prop("disabled", true)
+					},
+					complete: function() {
+						layer.closeAll("loading");
+						$("#addHandler").prop("disabled", false)
+					},
+					data: params,
+					dataType: "json",
+					sucess: function(res) {
+						var datas = res.list;
+						if (datas.length == 0) {
+							refresher.info.pullUpLable = "我是有底线的";
+							finish = true;
+							myScroll.refresh();
+						} else {
+							$("#tblData").append(datas.map(function(v) {
+								return temPlate;
+							}).join(" "));
+							count++;
+							myScroll.refresh();
+						}
+					},
+					error: function() {
+
+					}
+				})
+
+			}
+		</script>
+	</body>
 
 </html>
