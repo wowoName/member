@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="plugins/newLayui/css/layui.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
     <title>客户统计</title>
+    <script src="js/global.js"></script>
 </head>
 
 <body>
@@ -20,9 +21,9 @@
                     <form class="layui-form" action="">
                         <div class="layui-form-item">
                             <div class="layui-inline">
-                                <label class="layui-form-label">邮箱地址：</label>
+                                <label class="layui-form-label">交易账号：</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" id="searchVal" placeholder="请输入邮箱地址">
+                                    <input type="text" class="layui-input" id="searchVal" placeholder="请输入交易账号">
                                 </div>
                             </div>
 
@@ -73,7 +74,7 @@
                     cellMinWidth: 80,
                     id: 'reloadTbl',
                     height: "full-100",
-                    parseData: function(res) { //res 即为原始返回的数据
+                   parseData: function(res) { //res 即为原始返回的数据
                         return {
                             "code": "", //解析接口状态
                             "msg": "", //解析提示文本
@@ -81,23 +82,37 @@
                             "data": res.list //解析数据列表
                         }
                     },
+                    request: {
+                        pageName: 'pageNum', //页码的参数名称，默认：page								
+                        limitName: '' //每页数据量的参数名，默认：limit
+                    },
+                    limits: [10],
+                    where: {
+                        "recommend": window.localStorage.getItem("recommend"),
+                        "account":""
+                    },
                     cols: [
                         [{
                             field: 'name',
-                            title: '姓名',
-                            width: 120
+                            title: '姓名'
                         }, {
-                            field: 'name',
-                            title: '电话',
-                            width: 120
+                            field: 'address',
+                            title: '交易账号'
+                        },  {
+                            field: 'phoneNum',
+                            title: '电话'
+                        }{
+                            field: 'email',
+                            title: '邮箱',
                         }, {
-                            field: 'name',
-                            title: '钱包地址',
+                            field: 'account',
+                            title: '交易账号'
                         }, {
-                            field: 'name',
-                            title: '交易账号',
-                            width: 120,
-
+                            field: 'state',
+                            title: '状态'
+                        },, {
+                            field: 'address',
+                            title: '钱包地址'
                         }]
                     ],
                     page: true,
@@ -116,7 +131,10 @@
                     page: {
                         curr: 1 //重新从第 1 页开始
                     },
-                    where: {}
+                    where: {
+                        "recommend": window.localStorage.getItem("recommend"),
+                        "account":$.trim( $("#searchVal").val() )
+                    },
                 });
             })
         });

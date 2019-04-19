@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="css/login.css" />
     <link rel="stylesheet" type="text/css" href="plugins/font-awesome/css/font-awesome.css" />
+    <script src="js/global.js"></script>
 </head>
 
 <body class="beg-login-bg">
@@ -32,40 +33,40 @@
                         <label class="beg-login-icon">
                          <i class="fa fa-key fa-fw" aria-hidden="true"></i>
                     </label>
-                        <input type="password" name="loginPass" autocomplete="off" placeholder="请输入密码" class="layui-input">
+                        <input type="password" name="loginPass" autocomplete="off" lisu-re="请输入密码" placeholder="请输入密码" class="layui-input">
                     </div>
 
                     <div class="layui-form-item">
                         <label class="beg-login-icon">
                          <i class="fa fa-user" aria-hidden="true"></i>
                     </label>
-                        <input type="text" name="name" autocomplete="off" placeholder="请输入姓名" class="layui-input">
+                        <input type="text" name="name" autocomplete="off" lisu-re=="" placeholder="请输入姓名" class="layui-input">
                     </div>
-					
+
                     <div class="layui-form-item">
                         <label class="beg-login-icon">
                          <i class="fa fa-id-card" aria-hidden="true"></i>
                     </label>
-                        <input type="text" name="idnum" autocomplete="off" placeholder="请输入身份证号码" class="layui-input">
+                        <input type="text" name="idnum" autocomplete="off" lisu-re=="" placeholder="请输入身份证号码" class="layui-input">
                     </div>
-					
+
                     <div class="layui-form-item">
                         <label class="beg-login-icon">
                          <i class="fa fa-phone" aria-hidden="true"></i>
                     </label>
-                        <input type="text" name="phoneNum" autocomplete="off" placeholder="请输入电话号码" class="layui-input">
+                        <input type="text" name="phoneNum" autocomplete="off" lisu-re=="" placeholder="请输入电话号码" class="layui-input">
                     </div>
                     <div class="layui-form-item">
                         <label class="beg-login-icon">
                         <i class="fa fa-google-wallet" aria-hidden="true"></i>
                     </label>
-                        <input type="text" name="address" autocomplete="off" placeholder="请输入钱包地址" class="layui-input">
+                        <input type="text" name="address" autocomplete="off" lisu-re=="" placeholder="请输入钱包地址" class="layui-input">
                     </div>
                     <div class="layui-form-item">
                         <label class="beg-login-icon">
                          <i class="fa fa-qrcode" aria-hidden="true"></i>
                     </label>
-                        <input type="text" name="recommend" autocomplete="off" placeholder="请输入推荐码" class="layui-input">
+                        <input type="text" name="recommend" autocomplete="off" lisu-re=="" placeholder="请输入推荐码" class="layui-input">
                     </div>
                     <div class="layui-form-item">
                         <button class="layui-btn layui-btn-normal lisu-loginBtn" type="button" id="addHandler" lay-submit lay-filter="login">
@@ -88,12 +89,32 @@
                 lisuUtils.requireForm("registeredCon");
                 var params = lisuUtils.getParams("registeredCon"),
                     idnumTest = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+                if (params.email == "") {
+                    layer.msg("请输入邮箱地址");
+                    return;
+                } else if (!(/^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/.test(params.email))) {
+                    layer.msg("请输入正确邮箱地址!");
+                    $("[name='email']").addClass("lisu-error-active");
+                    return;
+                } else {
+                    $("[name='email']").removeClass("lisu-error-active");
+                }
+
                 if (params.loginPass == "") {
                     layer.msg("请输入登录密码");
                     $("#loginPass").focus();
                     return;
                 } else if (!/^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/.test(params.loginPass)) {
                     layer.msg("密码最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符");
+                    $("[name='loginPass']").addClass("lisu-error-active");
+                    return;
+                } else {
+                    $("[name='loginPass']").removeClass("lisu-error-active");
+                }
+
+
+                if (params.name == "") {
+                    layer.msg("请输入姓名");
                     return;
                 }
                 if (params.idnum == "") {
@@ -101,7 +122,20 @@
                     return;
                 } else if (!idnumTest.test(params.idnum)) {
                     layer.msg("身份证号有误");
+                    $("[name='idnum']").addClass("lisu-error-active");
                     return;
+                } else {
+                    $("[name='idnum']").removeClass("lisu-error-active");
+                }
+                if (params.phoneNum == "") {
+                    layer.msg("请输入电话号码");
+                    return;
+                } else if (!(/^1[34578]\d{9}$/.test(params.phoneNum))) {
+                    layer.msg("请输入正确的电话号码!");
+                    $("[name='phoneNum']").addClass("lisu-error-active");
+                    return;
+                } else {
+                    $("[name='phoneNum']").removeClass("lisu-error-active");
                 }
                 if (params.address == "") {
                     layer.msg("请输入钱包地址");
@@ -111,26 +145,13 @@
                     layer.msg("请输入推荐码");
                     return;
                 }
-                if (params.phoneNum == "") {
-                    layer.msg("请输入电话号码");
-                    return;
-                } else if (!(/^1[34578]\d{9}$/.test(params.phoneNum))) {
-                    layer.msg("请输入正确的电话号码!");
-                    return;
-                }
-                if (params.name == "") {
-                    layer.msg("请输入姓名");
-                    return;
-                }
-                if (params.email == "") {
-                    layer.msg("请输入邮箱地址");
-                    return;
-                } else if (!(/^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/.test(params.email))) {
-                    layer.msg("请输入正确邮箱地址!");
-                    return;
-                }
+<<<<<<< HEAD
                 console.log( JSON.stringify(params) )
                  $.ajax({
+=======
+
+                $.ajax({
+>>>>>>> 6db4490a5322e41813f52db7e4e631c7bde50ea6
                     url: "http://146.196.77.87/regCenter/api/user/save",
                     type: "post",
                     beforeSend: function() {

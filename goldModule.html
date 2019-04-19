@@ -9,29 +9,61 @@
     <link rel="shortcut icon" href="images/logo.jpg" />
     <title>入金</title>
     <link rel="stylesheet" type="text/css" href="css/gold.css" />
+    <script src="js/clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/global.js"></script>
 </head>
 
 <body>
     <div class="glodMain">
         <div class="item">
-            <div class="walAddress" id="walAddress">
-                222254564645645dsfsdfds6f54ds6f
-            </div>
-            <div class="goldImg">
-                <img src="images/a.png" alt="">
-            </div>
+            <div class="walAddress" id="walAddress"></div>
+            <div class="goldImg" id="goldImg"> </div>
             <input type="button" id="copyCode" data-clipboard-action="copy" data-clipboard-target="#walAddress" class="copyCode" value="复制收款地址">
         </div>
     </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/qrcode.js" type="text/javascript" charset="utf-8"></script>
+
     <script type="text/javascript" src="plugins/layui/layui.js"></script>
-    <script src="js/clipboard.min.js" type="text/javascript" charset="utf-8"></script>
     <script>
+        var clipboard = new ClipboardJS('#copyCode');
+        clipboard.on('success', function(e) {
+            layer.msg('复制成功');
+            e.clearSelection();
+        });
+        clipboard.on('error', function(e) {
+            layer.msg('复制失败，请手动复制！')
+        });
         layui.use(['layer', 'form'], function() {
             var layer = layui.layer,
-                $ = layui.jquery,
                 form = layui.form();
-            var clipboard = new Clipboard('#copyCode');
-        });
+            $.ajax({
+                url: "http://146.196.77.87/regCenter/api/amount/income",
+                type: "post",
+                beforeSend: function() {
+                    layer.load(2);
+                },
+                complete: function() {
+                    layer.closeAll("loading");
+                },
+                data: {},
+                dataType: "json",
+                success: function(res) {
+                    $("#walAddress").html(res.address);
+                    jQuery('#goldImg').qrcode({
+                        render: "canvas", //也可以替换为table
+                        width: 300,
+                        height: 300,
+                        text: res.address
+                    });
+
+                },
+                error: function() {
+                    layer.msg("请稍后重试!")
+                }
+            });
+        })
     </script>
 </body>
 

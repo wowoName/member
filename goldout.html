@@ -10,8 +10,8 @@
     <title>出金</title>
     <link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
     <link rel="stylesheet" href="css/login.css" />
-
     <link rel="stylesheet" type="text/css" href="plugins/font-awesome/css/font-awesome.css" />
+    <script src="js/global.js"></script>
 </head>
 
 <body class="beg-login-bg">
@@ -26,18 +26,14 @@
                         <label class="beg-login-icon">
 								<i class="fa fa-user-o"></i>
 							</label>
-                        <div class="inputItem">
-                            刘晓萌
-                        </div>
+                        <div class="inputItem" id="userName" data-info="用户姓名"></div>
                     </div>
 
                     <div class="layui-form-item">
                         <label class="beg-login-icon">
 								<i class="fa fa-linkedin"></i>
 							</label>
-                        <div class="inputItem" id="walletAddress">
-                            wwsdfdsfdasfadsfad2343454553456764gfgfhdgfh564
-                        </div>
+                        <div class="inputItem" id="walletAddress" data-info="用户钱包地址"></div>
                     </div>
 
                     <div class="layui-form-item">
@@ -48,7 +44,7 @@
                     </div>
 
                     <div class="layui-form-item">
-                        <button class="layui-btn layui-btn-normal lisu-loginBtn" lay-submit lay-filter="login">
+                        <button class="layui-btn layui-btn-normal lisu-loginBtn" id="addHandler" lay-submit lay-filter="login">
 								申请
 							</button>
                     </div>
@@ -67,12 +63,53 @@
             var layer = layui.layer,
                 $ = layui.jquery,
                 form = layui.form();
+            //钱包地址 
+            $("#walletAddress").html(window.localStorage.getItem("rxAddress"));
+            //用户姓名
+            $("#userName").html(window.localStorage.setItem("rxUserName"));
+
             $("#walletAddress").on("click", function() {
                 layer.tips('wwsdfdsfdasfadsfad2343454553456764gfgfhdgfh564', '#walletAddress', {
                     tips: [3, "#78BA32"]
                 });
             });
             lisuUtils.number($("#outMoney"));
+            //出金
+            $("#addHandler").on("click", function() {
+                let amount = $("#outMoney").val();
+                if (amount == "") {
+                    layer.msg("请填写申请金额");
+                    reutrn;
+                }
+                $.ajax({
+                    url: "http:// 146.196.77.87/regCenter /api/user/apply",
+                    type: "post",
+                    beforeSend: function() {
+                        layer.load(2);
+                        $("#addHandler").prop("disabled", true)
+                    },
+                    complete: function() {
+                        layer.closeAll("loading");
+                        $("#addHandler").prop("disabled", false)
+                    },
+                    data: {
+                        userId: window.localStorage.setItem("rxUserId"),
+                        amount: $("#outMoney").val()
+                    },
+                    dataType: "json",
+                    success: function(res) {
+                        if (res.code == "false") {
+                            layer.msg(res.msg);
+                            return;
+                        } else {
+                            $("#outMoney").val("") //清空申请金额
+                        }
+                    },
+                    error: function() {
+                        layer.msg("系统错误");
+                    }
+                })
+            })
         });
     </script>
 </body>

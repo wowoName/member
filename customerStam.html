@@ -9,7 +9,7 @@
     <title>客户统计</title>
     <link rel="stylesheet" type="text/css" href="scroller/pullToRefresh.css" />
     <link rel="stylesheet" type="text/css" href="css/billDm.css" />
-
+    <script src="js/global.js"></script>
 </head>
 
 <body>
@@ -51,18 +51,24 @@
             temPlate = `
 			<div class="billItem">
 					<div class="itemChild">
-						<span class="title">时间</span>
-						<span class="content">2019年4月12日19:34:55</span>
+						<span class="title">姓名</span>
+						<span class="content">${v.name}</span>
 					</div>
 
 					<div class="itemChild">
-						<span class="title">金额</span>
-						<span class="content">2019年4月12日</span>
+						<span class="title">交易账号</span>
+						<span class="content">${v.account}</span>
 					</div>
-
+                        
+                    <div class="itemChild">
+						<span class="title">电话</span>
+						<span class="content">${v.phoneNum}</span>
+					</div>
+					
+					
 					<div class="itemChild">
-						<span class="title">交易状态</span>
-						<span class="content">2019年4月12日</span>
+						<span class="title">邮箱</span>
+						<span class="content">${v.email}</span>
 					</div>
 				</div>`;
         count = 1,
@@ -86,19 +92,40 @@
         }
 
         function getData() {
-            setTimeout(function() {
-                var elems = "";
-                for (var i = 0; i < 5; i++) {
-                    elems += temPlate;
+           
+            $.ajax({
+                url: "http://146.196.77.87/regCenter/api/amount/list",
+                type: "post",
+                beforeSend: function() {
+                    //layer.load(2);
+                },
+                complete: function() {
+                    //layer.closeAll("loading");
+                },
+                data: {
+                    userId: window.localStorage.setItem("rxUserId"),
+                    pageNum: count
+                },
+                dataType: "json",
+                success: function(res) {
+                    var datas = res.list;
+                    if (datas.length == 0) {
+                        refresher.info.pullUpLable = "无更多数据";
+                        finish = true; //上拉加载不可用
+                        myScroll.refresh(); //停止刷新状态
+                    } else {
+                        //渲染数据
+                        $("#tblData").append(datas.map(function(v) {
+                            return temPlate;
+                        }).join(" "));
+                        count++; //页码+1
+                        myScroll.refresh(); //停止刷新状态
+                    }
+                },
+                error: function() {
+                    layer.msg("系统错误!");
                 }
-                $("#tblData").append(elems);
-                count++;
-                myScroll.refresh();
-                if (count > 3) {
-                    refresher.info.pullUpLable = "我是有底线的";
-                    finish = true;
-                };
-            }, 1000);
+            })
         }
     </script>
 </body>

@@ -23,20 +23,20 @@
                 <form action="/manage/login" class="layui-form" method="post">
                     <div class="layui-form-item">
                         <label class="beg-login-icon">
-                         <i class="fa fa-envelope" aria-hidden="true"></i>
-                    </label>
-                        <input type="text" name="email" autocomplete="off" placeholder="请输入邮箱地址" class="layui-input">
+								<i class="fa fa-envelope" aria-hidden="true"></i>
+							</label>
+                        <input type="text" name="email" autocomplete="off" lisu-re="请输入邮箱地址" placeholder="请输入邮箱地址" class="layui-input">
                     </div>
                     <div class="layui-form-item">
                         <label class="beg-login-icon">
-                        <i class="layui-icon">&#xe642;</i>
-                    </label>
-                        <input type="password" name="loginPass" autocomplete="off" placeholder="请输入密码" class="layui-input">
+								<i class="layui-icon">&#xe642;</i>
+							</label>
+                        <input type="password" name="loginPass" autocomplete="off" lisu-re="请输入密码" placeholder="请输入密码" class="layui-input">
                     </div>
                     <div class="layui-form-item">
                         <button class="layui-btn layui-btn-normal lisu-loginBtn" type="button" id="addHandler" lay-submit lay-filter="login">
-                            登录
-                        </button>
+								登录
+							</button>
                     </div>
 
                 </form>
@@ -48,28 +48,40 @@
         </div>
     </div>
     <div class="logindesc">瑞讯交易平台会员登录中心</div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/lisuUtils.js"></script>
     <script type="text/javascript" src="plugins/layui/layui.js"></script>
+    <script src="js/global.js"></script>
     <script>
         layui.use(['layer', 'form'], function() {
             var layer = layui.layer,
-                $ = layui.jquery,
-                form = layui.form();
+                $ = layui.jquery;
+
             $("#addHandler").on("click", function() {
                 lisuUtils.requireForm("registeredCon");
                 var params = lisuUtils.getParams("registeredCon");
-                if (params.loginPass == "") {
-                    layer.msg("请输入登录密码");
-                    $("#loginPass").focus();
-                    return;
-                }
                 if (params.email == "") {
                     layer.msg("请输入邮箱地址");
+                    $("[name='email']").addClass("lisu-error-active");
                     return;
                 } else if (!(/^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/.test(params.email))) {
+                    $("[name='email']").addClass("lisu-error-active");
                     layer.msg("请输入正确邮箱地址!");
                     return;
+                } else {
+                    $("[name='loginPass']").removeClass("lisu-error-active");
                 }
-                 $.ajax({
+
+                if (params.loginPass == "") {
+                    layer.msg("请输入登录密码");
+                    $("[name='loginPass']").addClass("lisu-error-active");
+                    return;
+                } else {
+                    $("[name='loginPass']").removeClass("lisu-error-active");
+                }
+
+
+                $.ajax({
                     url: "http://146.196.77.87/regCenter/api/user/login",
                     type: "post",
                     beforeSend: function() {
@@ -82,7 +94,7 @@
                     },
                     data: params,
                     dataType: "json",
-                    sucess: function(res) {
+                    success: function(res) {
                         if (res.return == "false") {
                             layer.msg(res.msg);
                             return;
@@ -91,6 +103,10 @@
                             window.localStorage.setItem("rxRole", res.role);
                             window.localStorage.setItem("rxUserName", res.info.name);
                             window.localStorage.setItem("rxUserId", res.info.id);
+                            //钱包地址
+                            window.localStorage.setItem("rxAddress", res.info.id);
+                            //推荐码
+                             window.localStorage.setItem("rxRecommend", res.info.recommend);
                             window.location.href = "index.html";
                         }
                     },
