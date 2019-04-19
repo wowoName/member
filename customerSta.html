@@ -69,7 +69,7 @@
                 layer.load(0);
                 table.render({
                     elem: '#test',
-                    url: 'datas/tbl.json',
+                    url: 'http://146.196.77.87/regCenter/api/user/getList',
                     cellMinWidth: 80,
                     id: 'reloadTbl',
                     height: "full-100",
@@ -78,7 +78,7 @@
                             "code": "", //解析接口状态
                             "msg": "", //解析提示文本
                             "count": res.total, //解析数据长度
-                            "data": res.data //解析数据列表
+                            "data": res.list //解析数据列表
                         }
                     },
                     cols: [

@@ -129,7 +129,8 @@
                     layer.msg("请输入正确邮箱地址!");
                     return;
                 }
-                return $.ajax({
+                console.log( JSON.stringify(params) )
+                 $.ajax({
                     url: "http://146.196.77.87/regCenter/api/user/save",
                     type: "post",
                     beforeSend: function() {
