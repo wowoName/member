@@ -71,6 +71,15 @@ layui.config({
     });
 
     function renderNav() {
+        //身份类型 user：普通客户；agent ：会员代理
+        let curRole = window.localStorage.getItem("rxRole");
+        if (curRole && curRole == "user") {
+            //普通用户不展示客户统计模块
+            pc.pop();
+            mobile.pop();
+        } else {
+            window.location.href = "login.html";
+        }
         navbar.set({
             spreadOne: true,
             elem: '#admin-navbar-side',

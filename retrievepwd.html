@@ -2,56 +2,85 @@
 
 <html>
 
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-		<link rel="shortcut icon" href="images/logo.jpg" />
-		<title>会员找回密码</title>
-		<link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
-		<link rel="stylesheet" href="css/login.css" />
-		<link rel="stylesheet" type="text/css" href="plugins/font-awesome/css/font-awesome.css"/>
-	</head>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="shortcut icon" href="images/logo.jpg" />
+    <title>会员找回密码</title>
+    <link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
+    <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" type="text/css" href="plugins/font-awesome/css/font-awesome.css" />
+    <script src="js/global.js"></script>
+</head>
 
-	<body class="beg-login-bg">
-		<div class="login-con">
-			<div class="beg-login-box">
-				<header>
-					<h1>找回密码</h1>
-				</header>
-				<div class="beg-login-main">
-					<form action="/manage/login" class="layui-form" method="post">
-						<div class="layui-form-item">
-							<label class="beg-login-icon">
+<body class="beg-login-bg">
+    <div class="login-con">
+        <div class="beg-login-box">
+            <header>
+                <h1>找回密码</h1>
+            </header>
+            <div class="beg-login-main">
+                <form action="/manage/login" class="layui-form" method="post">
+                    <div class="layui-form-item">
+                        <label class="beg-login-icon">
                        <i class="fa fa-envelope" aria-hidden="true"></i>
                     </label>
-							<input type="text" name="userName" autocomplete="off" placeholder="请输入注册邮箱" class="layui-input">
-						</div>
-						
-						<div class="layui-form-item">
-							<button class="layui-btn layui-btn-normal lisu-loginBtn" lay-submit lay-filter="login">
+                        <input type="text" id="email" name="email" autocomplete="off" placeholder="请输入注册邮箱" class="layui-input">
+                    </div>
+
+                    <div class="layui-form-item">
+                        <button class="layui-btn layui-btn-normal lisu-loginBtn" type="button" id="handler">
                             发送邮件
                         </button>
-						</div>
+                    </div>
 
-					</form>
-				</div>
-			</div>
-		</div>
-		
-		<script type="text/javascript" src="plugins/layui/layui.js"></script>
-		<script>
-			layui.use(['layer', 'form'], function() {
-				var layer = layui.layer,
-					$ = layui.jquery,
-					form = layui.form();
+                </form>
+            </div>
+        </div>
+    </div>
 
-				form.on('submit(login)', function(data) {
-					location.href = 'index.html';
-					return false;
-				});
-			});
-		</script>
-	</body>
+    <script type="text/javascript" src="plugins/layui/layui.js"></script>
+    <script>
+        layui.use(['layer', 'form'], function() {
+            var layer = layui.layer,
+                $ = layui.jquery;
+            $("#handler").on("click", function() {
+                let curEamil = $.trim($("#email").val());
+                if (curEamil == "") {
+                    layer.msg("请输入邮箱地址");
+                    $("[name='email']").addClass("lisu-error-active");
+                    return;
+                } else if (!(/^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/.test(curEamil))) {
+                    layer.msg("请输入正确邮箱地址!");
+                    $("[name='email']").addClass("lisu-error-active");
+                    return;
+                } else {
+                    $("[name='email']").removeClass("lisu-error-active");
+                }
+                $.ajax({
+                    url: "http://146.196.77.87/regCenter/api/user/forgetPass",
+                    type: "post",
+                    beforeSend: function() {
+                        layer.load(2);
+                    },
+                    complete: function() {
+                        layer.closeAll("loading");
+                    },
+                    data: {
+                        email: curEamil
+                    },
+                    dataType: "json",
+                    success: function(res) {
+                        layer.msg(res.msg);
+                    },
+                    error: function() {
+                        layer.msg("请稍后重试!")
+                    }
+                });
+            })
+        });
+    </script>
+</body>
 
 </html>

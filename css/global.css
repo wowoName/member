@@ -95,6 +95,7 @@ admin-side-toggle .header {
 
 .menu a:hover {
     color: #fff;
+    -o-transition: all .5s;
     transition: all .5s;
     -webkit-transition: all .5s
 }
@@ -358,6 +359,7 @@ body .layui-layout-admin .footer-demo {
     border: 1px solid #464B5B;
     font-size: 24px;
     color: #ccc;
+    -o-transition: all .5s;
     transition: all .5s;
     -webkit-transition: all .5s;
 }
@@ -1323,6 +1325,7 @@ body .site-demo-nav .layui-nav-item {
         z-index: 1000;
         left: -260px;
         background-color: #fff;
+        -o-transition: all .3s;
         transition: all .3s;
         -webkit-transition: all .3s;
     }
@@ -1378,6 +1381,7 @@ body .site-demo-nav .layui-nav-item {
         position: fixed;
         top: 0;
         left: -260px;
+        -o-transition: all .3s;
         transition: all .3s;
         -webkit-transition: all .3s;
         z-index: 10000;
