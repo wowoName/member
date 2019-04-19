@@ -15,26 +15,10 @@
 <body>
     <div id="wrapper">
         <div class="detailCon" id="tblData">
-            <div class="billItem">
-                <div class="itemChild">
-                    <span class="title">时间</span>
-                    <span class="content">2019年4月12日19:34:55</span>
-                </div>
-
-                <div class="itemChild">
-                    <span class="title">金额</span>
-                    <span class="content">2019年4月12日</span>
-                </div>
-
-                <div class="itemChild">
-                    <span class="title">交易状态</span>
-                    <span class="content">2019年4月12日</span>
-                </div>
-            </div>
-
         </div>
     </div>
     <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+     <script src="plugins/newLayui/layui.js" type="text/javascript" charset="utf-8"></script>
     <script src="scroller/iscroll.js" type="text/javascript" charset="utf-8"></script>
     <script src="scroller/pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript">
@@ -48,8 +32,15 @@
         var tblData = [{
                 time: "2019年4月12日17:38:04"
             }],
-            temPlate =
-            `
+            count = 1,
+            finish = false;
+        refresher.init({
+            id: "wrapper",
+            pullDownAction: Refresh,
+            pullUpAction: Load
+        });
+        function temPlate(v){
+        	return `
 			<div class="billItem">
 			<div class="itemChild">
 				<span class="title">类型</span>
@@ -69,14 +60,9 @@
 						<span class="title">交易状态</span>
 						<span class="content">${v.state}</span>
 					</div>
-				</div>`,
-            count = 1,
-            finish = false;
-        refresher.init({
-            id: "wrapper",
-            pullDownAction: Refresh,
-            pullUpAction: Load
-        });
+				</div>`
+        	
+        }
         //下拉刷新
         function Refresh() {
             count = 1; //页数重置为1
@@ -103,11 +89,11 @@
                     //layer.closeAll("loading");
                 },
                 data: {
-                    userId: window.localStorage.setItem("rxUserId"),
+                    userId: window.localStorage.getItem("rxUserId"),
                     pageNum: count
                 },
                 dataType: "json",
-                success: function(res) {
+                success:function(res) {
                     var datas = res.list;
                     if (datas.length == 0) {
                         refresher.info.pullUpLable = "无更多数据";

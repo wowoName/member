@@ -1,52 +1,52 @@
 const pc = [{
         "title": "入金",
-        "icon": "../images/goldIn.png",
+        "icon": "images/goldIn.png",
         "href": "goldModule.html",
         "spread": false,
     }, {
         "title": "出金",
-        "icon": "../images/goldOut.png",
+        "icon": "images/goldOut.png",
         "href": "goldout.html",
         "spread": false,
     }, {
         "title": "出入金明细",
-        "icon": "../images/billdetail.png",
+        "icon": "images/billdetail.png",
         "href": "billDetails.html",
         "spread": false,
     }, {
         "title": "信息更改",
-        "icon": "../images/editInfo.png",
+        "icon": "images/editInfo.png",
         "href": "perInfoChange.html",
         "spread": false,
     }, {
         "title": "客户统计",
-        "icon": "../images/statistical.png",
+        "icon": "images/statistical.png",
         "href": "customerSta.html",
         "spread": false,
     }],
     mobile = [{
         "title": "入金",
-        "icon": "../images/goldIn.png",
+        "icon": "images/goldIn.png",
         "href": "goldModule.html",
         "spread": false,
     }, {
         "title": "出金",
-        "icon": "../images/goldOut.png",
+        "icon": "images/goldOut.png",
         "href": "goldout.html",
         "spread": false,
     }, {
         "title": "出入金明细",
-        "icon": "../images/billdetail.png",
+        "icon": "images/billdetail.png",
         "href": "billDetailsm.html",
         "spread": false,
     }, {
         "title": "信息更改",
-        "icon": "../images/editInfo.png",
+        "icon": "images/editInfo.png",
         "href": "perInfoChange.html",
         "spread": false,
     }, {
         "title": "客户统计",
-        "icon": "../images/statistical.png",
+        "icon": "images/statistical.png",
         "href": "customerStam.html",
         "spread": false,
     }];

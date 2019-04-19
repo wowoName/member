@@ -61,12 +61,11 @@
     <script>
         layui.use(['layer', 'form'], function() {
             var layer = layui.layer,
-                $ = layui.jquery,
                 form = layui.form();
             //钱包地址 
             $("#walletAddress").html(window.localStorage.getItem("rxAddress"));
             //用户姓名
-            $("#userName").html(window.localStorage.setItem("rxUserName"));
+            $("#userName").html(window.localStorage.getItem("rxUserName"));
 
             $("#walletAddress").on("click", function() {
                 layer.tips('wwsdfdsfdasfadsfad2343454553456764gfgfhdgfh564', '#walletAddress', {
@@ -93,7 +92,7 @@
                         $("#addHandler").prop("disabled", false)
                     },
                     data: {
-                        userId: window.localStorage.setItem("rxUserId"),
+                        userId: window.localStorage.getItem("rxUserId"),
                         amount: $("#outMoney").val()
                     },
                     dataType: "json",

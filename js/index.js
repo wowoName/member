@@ -1,4 +1,5 @@
 var tab;
+
 layui.config({
     base: 'js/',
     version: new Date().getTime()
@@ -7,6 +8,7 @@ layui.config({
         $ = layui.jquery,
         layer = layui.layer,
         navbar = layui.navbar();
+        $("#userName").html(window.localStorage.getItem("rxUserName"));
     tab = layui.tab({
         elem: '.admin-nav-card', //设置选项卡容器
         contextMenu: true,
@@ -77,9 +79,7 @@ layui.config({
             //普通用户不展示客户统计模块
             pc.pop();
             mobile.pop();
-        } else {
-            window.location.href = "login.html";
-        }
+        } 
         navbar.set({
             spreadOne: true,
             elem: '#admin-navbar-side',

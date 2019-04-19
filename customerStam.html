@@ -48,7 +48,10 @@
         var tblData = [{
                 time: "2019年4月12日17:38:04"
             }],
-            temPlate = `
+        count = 1,
+            finish = false;
+            function temPlate(v){
+            	return `
 			<div class="billItem">
 					<div class="itemChild">
 						<span class="title">姓名</span>
@@ -71,8 +74,7 @@
 						<span class="content">${v.email}</span>
 					</div>
 				</div>`;
-        count = 1,
-            finish = false;
+            }
         refresher.init({
             id: "wrapper",
             pullDownAction: Refresh,

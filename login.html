@@ -54,9 +54,7 @@
     <script src="js/global.js"></script>
     <script>
         layui.use(['layer', 'form'], function() {
-            var layer = layui.layer,
-                $ = layui.jquery;
-
+            var layer = layui.layer;
             $("#addHandler").on("click", function() {
                 lisuUtils.requireForm("registeredCon");
                 var params = lisuUtils.getParams("registeredCon");
@@ -104,10 +102,10 @@
                             window.localStorage.setItem("rxUserName", res.info.name);
                             window.localStorage.setItem("rxUserId", res.info.id);
                             //钱包地址
-                            window.localStorage.setItem("rxAddress", res.info.id);
+                            window.localStorage.setItem("rxAddress", res.info.address);
                             //推荐码
                              window.localStorage.setItem("rxRecommend", res.info.recommend);
-                            window.location.href = "index.html";
+                             window.location.href = "index.html";
                         }
                     },
                     error: function() {
