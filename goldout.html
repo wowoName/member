@@ -81,7 +81,7 @@
                     reutrn;
                 }
                 $.ajax({
-                    url: "http:// 146.196.77.87/regCenter /api/user/apply",
+                    url: "http://146.196.77.87/regCenter/api/user/apply",
                     type: "post",
                     beforeSend: function() {
                         layer.load(2);
@@ -97,12 +97,10 @@
                     },
                     dataType: "json",
                     success: function(res) {
-                        if (res.code == "false") {
-                            layer.msg(res.msg);
-                            return;
-                        } else {
-                            $("#outMoney").val("") //清空申请金额
-                        }
+                        layer.msg(res.msg);
+                        if (res.code == "true")
+                            $("#outMoney").val(""); //清空申请金额
+
                     },
                     error: function() {
                         layer.msg("系统错误");

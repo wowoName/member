@@ -67,7 +67,7 @@
                     layer.msg("请输入正确邮箱地址!");
                     return;
                 } else {
-                    $("[name='loginPass']").removeClass("lisu-error-active");
+                    $("[name='email']").removeClass("lisu-error-active");
                 }
 
                 if (params.loginPass == "") {
@@ -104,8 +104,14 @@
                             //钱包地址
                             window.localStorage.setItem("rxAddress", res.info.address);
                             //推荐码
-                             window.localStorage.setItem("rxRecommend", res.info.recommend);
-                             window.location.href = "index.html";
+                            window.localStorage.setItem("rxRecommend", res.info.recommend);
+							window.localStorage.setItem("rxEmail", res.info.email);
+							  //身份证号码
+							window.localStorage.setItem("rxIdnum", res.info.idnum);
+							window.localStorage.setItem("rxPhoneNum", res.info.phoneNum);
+							
+							  
+                            window.location.href = "index.html";
                         }
                     },
                     error: function() {

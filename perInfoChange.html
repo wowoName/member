@@ -2,79 +2,143 @@
 
 <html>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="shortcut icon" href="images/logo.jpg" />
-    <title>个人信息修改</title>
-    <link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
-    <link rel="stylesheet" href="css/login.css" />
-    <link rel="stylesheet" type="text/css" href="plugins/font-awesome/css/font-awesome.css" />
-    <script src="js/global.js"></script>
-</head>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="shortcut icon" href="images/logo.jpg" />
+		<title>个人信息修改</title>
+		<link rel="stylesheet" href="plugins/layui/css/layui.css" media="all" />
+		<link rel="stylesheet" href="css/login.css" />
+		<link rel="stylesheet" type="text/css" href="plugins/font-awesome/css/font-awesome.css" />
+		<script src="js/global.js"></script>
+	</head>
 
-<body class="beg-login-bg">
-    <div class="regisred-con">
-        <div class="regisred">
-            <header>
-                <h1>信息修改</h1>
-            </header>
-            <div class="beg-login-main">
-                <form action="/manage/login" class="layui-form" method="post">
-                    <div class="layui-form-item">
-                        <label class="beg-login-icon">
-                         <i class="fa fa-envelope" aria-hidden="true"></i>
-                    </label>
-                        <div class="inputItem">1069722589@qq.com</div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="beg-login-icon">
-                         <i class="fa fa-user" aria-hidden="true"></i>
-                    </label>
-                        <div class="inputItem">张三</div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="beg-login-icon">
-                         <i class="fa fa-id-card" aria-hidden="true"></i>
-                    </label>
-                        <div class="inputItem">371321************</div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="beg-login-icon">
-                         <i class="fa fa-phone" aria-hidden="true"></i>
-                    </label>
-                        <div class="inputItem">139********</div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="beg-login-icon">
-                        <i class="fa fa-google-wallet" aria-hidden="true"></i>
-                    </label>
-                        <input type="text" name="userName" autocomplete="off" placeholder="请输入钱包地址" class="layui-input">
-                    </div>
+	<body class="beg-login-bg">
+		<div class="regisred-con">
+			<div class="regisred">
+				<header>
+					<h1>信息修改</h1>
+				</header>
+				<div class="beg-login-main" id="registeredCon">
+					<form  class="layui-form" >
+						<div class="layui-form-item">
+							<label class="beg-login-icon">
+								<i class="fa fa-envelope" aria-hidden="true"></i>
+							</label>
+							<div class="inputItem" id="email">***</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="beg-login-icon">
+								<i class="fa fa-user" aria-hidden="true"></i>
+							</label>
+							<input type="text" class="layui-input" id="userName"  name="name"  placeholder="请输入姓名"/>
+						</div>
+						<div class="layui-form-item">
+							<label class="beg-login-icon">
+								<i class="fa fa-id-card" aria-hidden="true"></i>
+							</label>
+							<input type="text" class="layui-input" id="userCard" name="idnum" placeholder="请输入身份证号码"/>
+						</div>
+						<div class="layui-form-item">
+							<label class="beg-login-icon">
+								<i class="fa fa-phone" aria-hidden="true"></i>
+							</label>
+							<input type="text" class="layui-input" id="phone" maxlength="11" name="phoneNum" placeholder="请输入电话号码"/>
+						</div>
+						<div class="layui-form-item">
+							<label class="beg-login-icon">
+								<i class="fa fa-google-wallet" aria-hidden="true"></i>
+							</label>
+							<input type="text" id="address" name="address" autocomplete="off" placeholder="请输入钱包地址" class="layui-input">
+						</div>
 
-                    <div class="layui-form-item">
-                        <button class="layui-btn layui-btn-normal lisu-loginBtn" lay-submit lay-filter="login">
-                              修改
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript" src="plugins/layui/layui.js"></script>
-    <script>
-        layui.use(['layer', 'form'], function() {
-            var layer = layui.layer,
-                $ = layui.jquery,
-                form = layui.form();
+						<div class="layui-form-item">
+							<button class="layui-btn layui-btn-normal lisu-loginBtn" type="button" id="addHandler" lay-submit lay-filter="login">
+								修改
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		 <script src="js/lisuUtils.js"></script>
+		<script type="text/javascript" src="plugins/layui/layui.js"></script>
+		<script>
+			layui.use(['layer', 'form'], function() {
+				var layer = layui.layer,
+					$ = layui.jquery,
+					idnumTest = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+				$("#email").html(window.localStorage.getItem("rxEmail"));
+				$("#userName").val(window.localStorage.getItem("rxUserName"));
+				$("#userCard").val(window.localStorage.getItem("rxIdnum"));
+				$("#phone").val(window.localStorage.getItem("rxPhoneNum"));
+				$("#address").val(window.localStorage.getItem("rxAddress"));
 
-            form.on('submit(login)', function(data) {
-                location.href = 'index.html';
-                return false;
-            });
-        });
-    </script>
-</body>
+				$("#addHandler").on("click", function() {
+					    lisuUtils.requireForm("registeredCon");
+					var params = lisuUtils.getParams("registeredCon");
+					if(params.idnum == "") {
+						layer.msg("请输入身份证号");
+						return;
+					} else if(!idnumTest.test(params.idnum)) {
+						layer.msg("身份证号有误");
+						$("[name='idnum']").addClass("lisu-error-active");
+						return;
+					} else {
+						$("[name='idnum']").removeClass("lisu-error-active");
+					}
+					if(params.phoneNum == "") {
+						layer.msg("请输入电话号码");
+						return;
+					} else if(!(/^1[34578]\d{9}$/.test(params.phoneNum))) {
+						layer.msg("请输入正确的电话号码!");
+						$("[name='phoneNum']").addClass("lisu-error-active");
+						return;
+					} else {
+						$("[name='phoneNum']").removeClass("lisu-error-active");
+					}
+					//添加用户id
+					params.id=  window.localStorage.getItem("rxUserId");
+					$.ajax({
+						url: "http://146.196.77.87/regCenter/api/user/update",
+						type: "post",
+						beforeSend: function() {
+							layer.load(2);
+							$("#addHandler").prop("disabled", true)
+						},
+						complete: function() {
+							layer.closeAll("loading");
+							$("#addHandler").prop("disabled", false)
+						},
+						data: params,
+						dataType: "json",
+						success: function(res) {
+							layer.msg(res.msg)
+							if(res.code=="true"){
+								 //保存用户的等级
+								window.localStorage.setItem("rxRole", res.role);
+								window.localStorage.setItem("rxUserName", res.info.name);
+								window.localStorage.setItem("rxUserId", res.info.id);
+								//钱包地址
+								window.localStorage.setItem("rxAddress", res.info.address);
+								//推荐码
+								window.localStorage.setItem("rxRecommend", res.info.recommend);
+								window.localStorage.setItem("rxEmail", res.info.email);
+								  //身份证号码
+								window.localStorage.setItem("rxIdnum", res.info.idnum);
+								window.localStorage.setItem("rxPhoneNum", res.info.phoneNum);								  
+								setTimeout(function(){
+									window.location.href = "index.html";
+								},2000)
+							}
+						},error:function(){
+							
+						}
+					})
+				})
+			});
+		</script>
+	</body>
 
 </html>

@@ -29,11 +29,11 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">交易时间：</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" id="startTime" placeholder="请选择开始时间">
+                                    <input type="text" class="layui-input" readonly="readonly" id="startTime" placeholder="请选择开始时间">
                                 </div>
                                 <label class="layui-form-label" style="text-align: center;padding: 9px 10px 9px 0px;">至</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input" id="endTime" placeholder="请选择结束时间">
+                                    <input type="text" class="layui-input" readonly="readonly" id="endTime" placeholder="请选择结束时间">
                                 </div>
                             </div>
 
@@ -66,6 +66,7 @@
         $(window).on("resize", function() {
             redirectUrl();
         });
+		 redirectUrl();
         //一般直接写在一个js文件中
         layui.use(['layer', 'form', 'table', 'laydate', 'jquery'], function() {
             var layer = layui.layer,
@@ -97,28 +98,21 @@
                     },
                     limits: [10],
                     where: {
-                        "userId": window.localStorage.getItem("rxUserId")
+                        "userId": window.localStorage.getItem("rxUserId"),
+						"account":$.trim($("#searchVal").val()),
+						"startDate":$("#startTime").val(),
+						"endDate":$("#endTime").val()
                     },
                     cols: [
                         [{
                             field: 'create_date',
-                            title: '时间',
-                            width: 120
+                            title: '时间'
                         }, {
                             field: 'amount',
-                            title: '转入账户',
-                            width: 120
-                        }, {
-                            field: 'amount',
-                            title: '转出账户',
-                        }, {
-                            field: 'amount',
-                            title: '金额',
-                            width: 120
+                            title: '金额'
                         }, {
                             field: 'state',
                             title: '交易状态',
-                            width: 120
                         }]
                     ],
                     page: true,
@@ -160,7 +154,12 @@
                     page: {
                         curr: 1 //重新从第 1 页开始
                     },
-                    where: {}
+                    where: {
+						 "userId": window.localStorage.getItem("rxUserId"),
+						"account":$.trim($("#searchVal").val()),
+						"startDate":$("#startTime").val(),
+						"endDate":$("#endTime").val()
+					}
                 });
             })
         });

@@ -6,7 +6,7 @@ var refresher = {
 		"pullingUpLable": "松开加载...",
 		"loadingLable": "加载中..."
 	},
-	init: function(parameter) {
+	init: function(parameter,callback) {
 		var wrapper = document.getElementById(parameter.id);
 		var div = document.createElement("div");
 		div.id = "scroller";
@@ -47,11 +47,13 @@ var refresher = {
 		var pullUpEl = document.getElementById('pullUp');
 		var pullUpOffset = pullUpEl.offsetHeight;
 		this.scrollIt(parameter, pullDownEl, pullDownOffset, pullUpEl, pullUpOffset);
+		callback();
 	},
 	scrollIt: function(parameter, pullDownEl, pullDownOffset, pullUpEl, pullUpOffset) {
 		myScroll = new iScroll(parameter.id, {
 			useTransition: true,
 			vScrollbar: false,
+			hideScrollbar:false,
 			topOffset: pullDownOffset,
 			onRefresh: function() {
 				refresher.onRelease(pullDownEl, pullUpEl);

@@ -57,6 +57,7 @@
         $(window).on("resize", function() {
             redirectUrl();
         });
+		 redirectUrl();
         //一般直接写在一个js文件中
         layui.use(['layer', 'form', 'table', 'laydate', 'jquery'], function() {
             var layer = layui.layer,
@@ -88,8 +89,8 @@
                     },
                     limits: [10],
                     where: {
-                        "recommend": window.localStorage.getItem("recommend"),
-                        "account":""
+                        "recommend": window.localStorage.getItem("rxRecommend"),
+						 "account":$.trim( $("#searchVal").val() )
                     },
                     cols: [
                         [{
@@ -101,7 +102,7 @@
                         },  {
                             field: 'phoneNum',
                             title: '电话'
-                        }{
+                        },{
                             field: 'email',
                             title: '邮箱',
                         }, {
@@ -132,7 +133,7 @@
                         curr: 1 //重新从第 1 页开始
                     },
                     where: {
-                        "recommend": window.localStorage.getItem("recommend"),
+                        "recommend": window.localStorage.getItem("rxRecommend"),
                         "account":$.trim( $("#searchVal").val() )
                     },
                 });

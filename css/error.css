@@ -8,3 +8,31 @@
     font-size: 30px;
     color: #FF4500;
 }
+
+.usrAcImg {
+    width: 403px;
+    height: 335px;
+}
+
+.logindesc {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 20px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, .5);
+    color: #FFFFFF;
+    text-align: center;
+}
+
+@media screen and (max-width: 750px) {
+    .logindesc {
+        padding: 15px 10px;
+    }
+    .usrAcImg {
+        width: 270px;
+        height: 209px;
+    }
+}

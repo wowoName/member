@@ -1,54 +1,49 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>出入金明细</title>
-    <link rel="stylesheet" type="text/css" href="scroller/pullToRefresh.css" />
-    <link rel="stylesheet" type="text/css" href="css/billDm.css" />
-    <script src="js/global.js"></script>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<title>出入金明细</title>
+		<link rel="stylesheet" type="text/css" href="scroller/pullToRefresh.css" />
+		<link rel="stylesheet" type="text/css" href="css/billDm.css" />
+		<script src="js/global.js"></script>
+	</head>
 
-<body>
-    <div id="wrapper">
-        <div class="detailCon" id="tblData">
-        </div>
-    </div>
-    <script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-     <script src="plugins/newLayui/layui.js" type="text/javascript" charset="utf-8"></script>
-    <script src="scroller/iscroll.js" type="text/javascript" charset="utf-8"></script>
-    <script src="scroller/pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript">
-        function redirectUrl() {
-            if ($("#navTitle", parent.document).css("display") != "none")
-                window.location.href = "billDetails.html";
-        }
-        $(window).on("resize", function() {
-            redirectUrl();
-        });
-        var tblData = [{
-                time: "2019年4月12日17:38:04"
-            }],
-            count = 1,
-            finish = false;
-        refresher.init({
-            id: "wrapper",
-            pullDownAction: Refresh,
-            pullUpAction: Load
-        });
-        function temPlate(v){
-        	return `
-			<div class="billItem">
-			<div class="itemChild">
-				<span class="title">类型</span>
-				<span class="content">${v.type}</span>
+	<body>
+		<div id="wrapper">
+			<div class="detailCon" id="tblData">
 			</div>
+		</div>
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="plugins/newLayui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="scroller/iscroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="scroller/pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
+		<script src="plugins/newLayui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function redirectUrl() {
+				if ($("#navTitle", parent.document).css("display") != "none")
+					window.location.href = "billDetails.html";
+			}
+			$(window).on("resize", function() {
+				redirectUrl();
+			});
+			 redirectUrl();
+			var count = 1,
+				finish = false;
+			refresher.init({
+				id: "wrapper",
+				pullDownAction: Refresh,
+				pullUpAction: Load
+			}, getData);
+
+			function temPlate(v) {
+				return `<div class="billItem">
 					<div class="itemChild">
 						<span class="title">时间</span>
-						<span class="content">${v.create}</span>
+						<span class="content">${v.create_date}</span>
 					</div>
 
 					<div class="itemChild">
@@ -61,61 +56,62 @@
 						<span class="content">${v.state}</span>
 					</div>
 				</div>`
-        	
-        }
-        //下拉刷新
-        function Refresh() {
-            count = 1; //页数重置为1
-            finish = false;
-            getData();
-        }
-        //上拉加载
-        function Load() {
-            if (finish) {
-                myScroll.refresh();
-                return;
-            }
-            getData();
-        }
-        //获取数据
-        function getData() {
-            $.ajax({
-                url: "http://146.196.77.87/regCenter/api/amount/list",
-                type: "post",
-                beforeSend: function() {
-                    //layer.load(2);
-                },
-                complete: function() {
-                    //layer.closeAll("loading");
-                },
-                data: {
-                    userId: window.localStorage.getItem("rxUserId"),
-                    pageNum: count
-                },
-                dataType: "json",
-                success:function(res) {
-                    var datas = res.list;
-                    if (datas.length == 0) {
-                        refresher.info.pullUpLable = "无更多数据";
-                        finish = true; //上拉加载不可用
-                        myScroll.refresh(); //停止刷新状态
-                    } else {
-                        //渲染数据
-                        $("#tblData").append(datas.map(function(v) {
-                            return temPlate;
-                        }).join(" "));
-                        count++; //页码+1
-                        myScroll.refresh(); //停止刷新状态
-                    }
-                },
-                error: function() {
-                    layer.msg("系统错误!");
-                }
-            })
-        };
-        //初始化数据
-        getData();
-    </script>
-</body>
+			}
+			//下拉刷新
+			function Refresh() {
+				count = 1; //页数重置为1
+				finish = false;
+				$("#tblData").html("");
+				getData();
+			}
+			//上拉加载
+			function Load() {
+				if (finish) {
+					refresher.info.pullUpLable = "无更多数据"
+					myScroll.refresh();
+					return;
+				}
+				getData();
+			}
+			//获取数据
+			function getData() {
+				$.ajax({
+					url: "http://146.196.77.87/regCenter/api/amount/list",
+					type: "post",
+					beforeSend: function() {
+						//layer.load(2);
+					},
+					complete: function() {
+						//layer.closeAll("loading");
+					},
+					data: {
+						userId: window.localStorage.getItem("rxUserId"),
+						pageNum: count
+					},
+					dataType: "json",
+					success: function(res) {
+						var datas = res.list;
+						//渲染数据
+						$("#tblData").append(datas.map(function(v) {
+							return temPlate(v);
+						}).join(" "));
+						if (datas.length == 0 || datas.length == res.total) {
+							finish = true; //上拉加载不可用
+							$(".pullUpLabel").html("无更多数据");
+							myScroll.refresh(); //停止刷新状态
+						} else {
+							$(".pullUpLabel").html("上拉加载...");
+							
+							count++; //页码+1
+							myScroll.refresh(); //停止刷新状态
+						}
+					},
+					error: function() {
+						layer.msg("系统错误!");
+					}
+				})
+			};
+		</script>
+	</body>
 
 </html>

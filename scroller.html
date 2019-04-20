@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" type="text/css" href="scroller/pullToRefresh.css" />
+		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="plugins/newLayui/layui.js" type="text/javascript" charset="utf-8"></script>
+		<script src="scroller/iscroll.js" type="text/javascript" charset="utf-8"></script>
+		<script src="scroller/pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
+		 <style type="text/css">
+		 	*{
+		 		touch-action: none;
+				font-size: 16px;
+		 	}
+			#scroller{
+				min-height: 100%;
+			}
+		 </style>
+	</head>
+	<body>
+		<div id="wrapper">
+			<div class="detailCon" id="tblData">
+			</div>
+		</div>
+		<script type="text/javascript">
+			var count = 1,
+				finish = false,
+				datas=[{
+					name:"小明1"
+				},{
+					name:"小明2"
+				},{
+					name:"小明3"
+				}];
+			refresher.init({
+				id: "wrapper",
+				pullDownAction: Refresh,
+				pullUpAction: Load
+			});
+			//下拉刷新
+			function Refresh() {
+				count = 1; //页数重置为1
+				finish = false;
+				getData();
+			}
+			//上拉加载
+			function Load() {
+				if (finish) {
+					refresher.info.pullUpLable="无更多数据"
+					myScroll.refresh();
+					return;
+				}else{
+					refresher.info.pullUpLable="上拉加载..."
+				}
+				getData();
+			}
+			function getData(){
+				setTimeout(()=>{
+					$("#tblData").append(datas.map(v=>{
+						return `<div>${v.name}</div>`
+					}).join(""));
+					count++;
+					myScroll.refresh(); //停止刷新状态
+					if(count>3){
+						finish=true;
+					}; //停止刷新状态
+				},2000)
+			}
+			getData();
+		</script>
+	</body>
+</html>
