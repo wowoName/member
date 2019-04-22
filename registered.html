@@ -66,7 +66,7 @@
 							<label class="beg-login-icon">
                          <i class="fa fa-qrcode" aria-hidden="true"></i>
                     </label>
-							<input type="text" name="recommend" autocomplete="off" lisu-re=="" placeholder="请输入推荐码" class="layui-input">
+							<input type="text" name="recommend" id="recommend" autocomplete="off" lisu-re=="" placeholder="请输入推荐码" class="layui-input">
 						</div>
 						<div class="layui-form-item">
 							<button class="layui-btn layui-btn-normal lisu-loginBtn" type="button" id="addHandler" lay-submit lay-filter="login">
@@ -85,6 +85,17 @@
 				var layer = layui.layer,
 					$ = layui.jquery,
 					form = layui.form();
+
+				function getQueryString(name) {
+					var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"),
+						r = window.location.search.substr(1).match(reg);
+					if(r != null) return unescape(r[2]);
+					return null;
+				}
+				let curRecommend=getQueryString("recommend");
+				if(curRecommend){
+				  $("#recommend").val(curRecommend);
+				}
 				$("#addHandler").on("click", function() {
 					lisuUtils.requireForm("registeredCon");
 					var params = lisuUtils.getParams("registeredCon"),
@@ -157,7 +168,7 @@
 							$("#addHandler").prop("disabled", false)
 						},
 						data: params,
-						dataType:"json",
+						dataType: "json",
 						success: function(res) {
 							if(res.code == "false") {
 								layer.msg(res.msg);
